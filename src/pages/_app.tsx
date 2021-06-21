@@ -5,6 +5,7 @@ import { ThemeProvider } from 'emotion-theming';
 import wrapper from '../store';
 import defaultTheme from '../commons/style/themes/defaults';
 import GlobalStyles from '../commons/style/global';
+import AppLayout from '../components/appLayout';
 
 /** External Plugin Css Inject */
 import 'core-js/stable';
@@ -38,9 +39,7 @@ function App({ Component, pageProps }: AppProps) {
       </Head>
       <ThemeProvider theme={defaultTheme}>
         <GlobalStyles />
-        <div>qweqweqwe</div>
-        <Component {...props} />
-        <div>qwkmd nkmdansjkd</div>
+        <AppLayout {...props} />
       </ThemeProvider>
     </>
   );

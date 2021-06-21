@@ -3,7 +3,7 @@ import Body from './body';
 import Footer from './footer';
 import Header from './header';
 
-const AppLayout = () => {
+const AppLayout = (): JSX.Element => {
   return (
     <>
       <Header />
