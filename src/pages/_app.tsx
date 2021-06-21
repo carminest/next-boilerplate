@@ -39,7 +39,9 @@ function App({ Component, pageProps }: AppProps) {
       </Head>
       <ThemeProvider theme={defaultTheme}>
         <GlobalStyles />
-        <AppLayout {...props} />
+        <AppLayout>
+          <Component {...props} />
+        </AppLayout>
       </ThemeProvider>
     </>
   );
