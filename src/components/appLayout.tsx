@@ -3,11 +3,16 @@ import Body from './body';
 import Footer from './footer';
 import Header from './header';
 
-const AppLayout = () => {
+type AppLayoutProps = {
+  children: React.ReactNode;
+};
+
+const AppLayout = ({ children }: AppLayoutProps): JSX.Element => {
   return (
     <>
       <Header />
       <Body />
+      {children}
       <Footer />
     </>
   );

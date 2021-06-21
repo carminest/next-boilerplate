@@ -26,7 +26,7 @@ export default class SimpleSlider extends Component {
     height: 550px;
   `;
 
-  render() {
+  render(): JSX.Element {
     const settings = {
       dots: true,
       infinite: true,
