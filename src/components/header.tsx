@@ -1,5 +1,40 @@
 import React from 'react';
 import styled from '@src/commons/style/themes/styled';
+import { useRouter } from 'next/router';
+
+type menu = {
+  name: string;
+  value: number;
+  url: string;
+  button: boolean;
+};
+
+const menus: menu[] = [
+  {
+    name: 'LOGO',
+    value: 1,
+    url: '/',
+    button: false,
+  },
+  {
+    name: '비버블록',
+    value: 2,
+    url: '/',
+    button: false,
+  },
+  {
+    name: '파트너사',
+    value: 3,
+    url: '/',
+    button: false,
+  },
+  {
+    name: '체험단신청',
+    value: 4,
+    url: '/',
+    button: true,
+  },
+];
 
 const HeaderRightSide = () => {
   return (
@@ -12,32 +47,35 @@ const HeaderRightSide = () => {
 };
 
 const HeaderLeftSide = (): JSX.Element => {
-  const logoStyle = {
-    width: '210px',
-    fontWeight: 800,
-  };
-
-  const expLi = {
-    width: '150px',
-  };
+  const router = useRouter();
   return (
     <>
       <LeftHead>
         <HeadUl>
-          <HeadLi style={logoStyle}>LOGO</HeadLi>
-          <HeadLi>비버블록</HeadLi>
-          <HeadLi>제품</HeadLi>
-          <HeadLi>파트너사</HeadLi>
-          <HeadLi style={expLi}>
-            <ExpButton>체험단 신청</ExpButton>
-          </HeadLi>
+          {menus.map((menu) => (
+            <HeadLi button key={menu.value}>
+              {menu.name}
+            </HeadLi>
+          ))}
         </HeadUl>
       </LeftHead>
     </>
   );
 };
 
+const SubMenu = () => {
+  return (
+    <>
+      <div></div>
+    </>
+  );
+};
+
 const Header = (): JSX.Element => {
+  const goUrl = () => {
+    return <></>;
+  };
+
   return (
     <Hbody>
       <HeaderContainer>
@@ -97,11 +135,11 @@ const HeadUl = styled.ul`
   text-align: center;
 `;
 
-const HeadLi = styled.li`
+const HeadLi = styled.li<{ button: boolean }>`
   margin: 0px;
   padding: 0px;
   display: inline-block;
-  width: 119px;
+  width: ${(props) => (props.button ? '150px' : '119px')};
   height: 96px;
   line-height: 96px;
   vertical-align: middle;
@@ -109,6 +147,10 @@ const HeadLi = styled.li`
     cursor: pointer;
   }
 `;
+
+HeadLi.defaultProps = {
+  button: false,
+};
 
 const RightHover = styled.span`
   font-size: 18px;
