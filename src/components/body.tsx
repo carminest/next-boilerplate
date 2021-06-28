@@ -2,17 +2,16 @@ import React, { useState } from 'react';
 import styled from '@src/commons/style/themes/styled';
 import SimpleSlider from '@src/components/bodyComp/carousel';
 
+type BodyProps = {
+  indexProp: string;
+};
+
 const LeftCont = () => {
   const [click, setClick] = useState('none');
 
   const onDetailClick = () => {
     alert(click);
     setClick('clicked');
-  };
-
-  const style = {
-    width: '241px',
-    height: '228px',
   };
 
   return (
@@ -25,23 +24,14 @@ const LeftCont = () => {
           알맞는 콘텐츠를 찾아보세요.
         </Sub>
         <SeeDetails onClick={onDetailClick}>자세히보기 &gt;</SeeDetails>
-        <CharIcons>
-          <img
-            style={style}
-            src="http://beaverblock.com/images/index/Lua-Icon.png"
-          />
-        </CharIcons>
+
+        <CharImg side="left" />
       </Cont>
     </>
   );
 };
 
 const RightCont = () => {
-  const style = {
-    width: '241px',
-    height: '228px',
-  };
-
   return (
     <>
       <Cont>
@@ -52,29 +42,45 @@ const RightCont = () => {
           통해 새로운 소식을 만나보세요.
         </Sub>
         <SeeDetails>자세히보기 &gt;</SeeDetails>
-        <CharIcons>
-          <img
-            style={style}
-            src="http://beaverblock.com/images/index/Character2.png"
-          />
-        </CharIcons>
+
+        <CharImg side="right" />
       </Cont>
     </>
   );
 };
 
-const Body = (): JSX.Element => {
-  return (
-    <>
-      <SimpleSlider />
-      <BodyFirstSec />
-      <BodySecondSec>
-        <LeftCont />
-        <RightCont />
-      </BodySecondSec>
-    </>
-  );
+const Body = ({ indexProp }: BodyProps): JSX.Element => {
+  const [indexState, setIndexState] = useState(indexProp);
+  if (indexState === 'index') {
+    return (
+      <>
+        <SimpleSlider />
+        <BodyFirstSec />
+        <BodySecondSec>
+          <LeftCont />
+          <RightCont />
+        </BodySecondSec>
+      </>
+    );
+  }
+  return <></>;
 };
+
+const left = 'http://beaverblock.com/images/index/Lua-Icon.png';
+const right = 'http://beaverblock.com/images/index/Character2.png';
+
+const CharImg = styled.div<{ side: string }>`
+  background-image: url(${(props) => (props.side === 'left' ? left : right)});
+  background-size: contain;
+  display: inline-block;
+  position: relative;
+  bottom: 85px;
+  left: 280px;
+  width: 250px;
+  height: 230px;
+  /* width height 고정값 및 포지션 관련 같이 봐주셨으면 좋겠습니다.
+  또한 width height 변수로 사용하는 예시도 궁금합니다. */
+`;
 
 const BodyFirstSec = styled.div`
   height: 630px;
@@ -115,15 +121,6 @@ const SeeDetails = styled.div`
   &:hover {
     cursor: pointer;
   }
-`;
-
-const CharIcons = styled.span`
-  display: inline-block;
-  position: relative;
-  bottom: 85px;
-  left: 280px;
-  width: 250px;
-  height: 250px;
 `;
 
 const Cont = styled.span`
