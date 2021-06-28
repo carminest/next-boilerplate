@@ -2,6 +2,10 @@ import React, { useState } from 'react';
 import styled from '@src/commons/style/themes/styled';
 import SimpleSlider from '@src/components/bodyComp/carousel';
 
+type BodyProps = {
+  indexProp: string;
+};
+
 const LeftCont = () => {
   const [click, setClick] = useState('none');
 
@@ -45,17 +49,21 @@ const RightCont = () => {
   );
 };
 
-const Body = (): JSX.Element => {
-  return (
-    <>
-      <SimpleSlider />
-      <BodyFirstSec />
-      <BodySecondSec>
-        <LeftCont />
-        <RightCont />
-      </BodySecondSec>
-    </>
-  );
+const Body = ({ indexProp }: BodyProps): JSX.Element => {
+  const [indexState, setIndexState] = useState(indexProp);
+  if (indexState === 'index') {
+    return (
+      <>
+        <SimpleSlider />
+        <BodyFirstSec />
+        <BodySecondSec>
+          <LeftCont />
+          <RightCont />
+        </BodySecondSec>
+      </>
+    );
+  }
+  return <></>;
 };
 
 const left = 'http://beaverblock.com/images/index/Lua-Icon.png';
