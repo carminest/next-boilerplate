@@ -85,7 +85,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "yarn lint:tsc && lint-staged",
+      "pre-commit": "yarn lint:tsc && lint-staged && build:prod",
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
     }
   },

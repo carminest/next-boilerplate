@@ -16,11 +16,14 @@ import 'core-js/modules/es.array.unscopables.flat';
 import 'core-js/modules/es.array.unscopables.flat-map';
 import 'core-js/modules/es.object.from-entries';
 import 'core-js/modules/web.immediate';
+import { DynamicPageProps } from '@src/commons/constants/type';
 
 function App({ Component, pageProps }: AppProps) {
   const props = {
     ...pageProps,
   };
+
+  const customProps = pageProps as DynamicPageProps;
 
   return (
     <>
@@ -32,9 +35,13 @@ function App({ Component, pageProps }: AppProps) {
         <title>스터디</title>
         <meta name="description" content="스터디" />
         <meta name="keywords" content="스터디,테스트 " />
-        <meta property="og:title" content={'스터디'} />
-        <meta property="og:description" content={'스터디 테스트 '} />
+        <meta property="og:title" content={customProps.title || '스터디'} />
+        <meta
+          property="og:description"
+          content={customProps.description || '스터디 테스트 '}
+        />
         <meta property="og:type" content="website" />
+
         <meta property="op:url" content="127.0.0.1" />
       </Head>
       <ThemeProvider theme={defaultTheme}>
