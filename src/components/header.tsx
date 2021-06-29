@@ -150,13 +150,14 @@ const Header = (): JSX.Element => {
         {renderHeaderLeftSide()}
         {renderHeaderRightSide()}
       </HeaderContainer>
-      {/* <SubMenu
+      <SubMenu
         hasSubMenus={
-          // menus?.find((menu) => menu?.value === selectedMenu)?.sub?.length > 0
+          (menus?.find((menu) => menu?.value === selectedMenu)?.sub?.length ??
+            0) > 0
         }
       >
         {renderSubMenuList()}
-      </SubMenu> */}
+      </SubMenu>
     </Hbody>
   );
 };
