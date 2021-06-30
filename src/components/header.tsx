@@ -39,7 +39,7 @@ const menus: menu[] = [
       {
         value: 2,
         name: '연혁',
-        url: '/Company/Info',
+        url: '/Company/History',
       },
     ],
   },
@@ -102,13 +102,19 @@ const Header = (): JSX.Element => {
     setSelectedMenu(value);
   };
 
+  const offHover = () => {
+    setSelectedMenu(null);
+  };
+
   const renderSubMenuList = useCallback((): JSX.Element => {
     return (
       <>
         {menus
           ?.find((menu) => menu.value === selectedMenu)
           ?.sub?.map((s) => (
-            <div key={s.value}>{s.name}</div>
+            <div key={s.value}>
+              <button onClick={() => router.push(s.url)}>{s.name}</button>
+            </div>
           ))}
       </>
     );
@@ -151,6 +157,7 @@ const Header = (): JSX.Element => {
         {renderHeaderRightSide()}
       </HeaderContainer>
       <SubMenu
+        onMouseLeave={offHover}
         hasSubMenus={
           (menus?.find((menu) => menu?.value === selectedMenu)?.sub?.length ??
             0) > 0
@@ -167,7 +174,7 @@ const SubMenu = styled.div<{ hasSubMenus: boolean }>`
   width: 1440px;
   padding-left: 120px;
   padding-right: 120px;
-  border: 2px solid greenyellow;
+
   display: ${(props) => (props.hasSubMenus ? 'display' : 'none')};
   justify-content: space-between;
   align-items: center;

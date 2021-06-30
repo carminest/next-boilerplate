@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
 import styled from '@src/commons/style/themes/styled';
 import SimpleSlider from '@src/components/bodyComp/carousel';
-
-type BodyProps = {
-  indexProp: string;
-};
+import { Router, useRouter } from 'next/router';
+import IndexPage from '@src/pages/index';
 
 const LeftCont = () => {
   const [click, setClick] = useState('none');
@@ -49,21 +47,24 @@ const RightCont = () => {
   );
 };
 
-const Body = ({ indexProp }: BodyProps): JSX.Element => {
-  const [indexState, setIndexState] = useState(indexProp);
-  if (indexState === 'index') {
-    return (
-      <>
-        <SimpleSlider />
-        <BodyFirstSec />
-        <BodySecondSec>
-          <LeftCont />
-          <RightCont />
-        </BodySecondSec>
-      </>
-    );
+const Body = (): JSX.Element => {
+  const router = useRouter();
+  const [isIndex, setIsIndex] = useState(true);
+
+  if (router.asPath === '/') {
+    setIsIndex(true);
   }
-  return <></>;
+
+  return (
+    <>
+      <SimpleSlider />
+      <BodyFirstSec />
+      <BodySecondSec>
+        <LeftCont />
+        <RightCont />
+      </BodySecondSec>
+    </>
+  );
 };
 
 const left = 'http://beaverblock.com/images/index/Lua-Icon.png';
@@ -80,6 +81,11 @@ const CharImg = styled.div<{ side: string }>`
   height: 230px;
   /* width height 고정값 및 포지션 관련 같이 봐주셨으면 좋겠습니다.
   또한 width height 변수로 사용하는 예시도 궁금합니다. */
+`;
+
+const BodyStandardSec = styled.div`
+  min-height: 80vh;
+  width: 100%;
 `;
 
 const BodyFirstSec = styled.div`

@@ -21,6 +21,9 @@ enum Color {
   Secondary500 = '#e8fb4d',
   Success500 = '#0091ff',
   Error500 = '#ff5023',
+
+  //beaverblock
+  Main = '#27C3AF',
 }
 
 export default Color;
