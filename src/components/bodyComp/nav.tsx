@@ -24,4 +24,5 @@ export const NavSec = styled.div`
   justify-content: space-between;
   align-items: flex-end;
   margin-top: 38px;
+  margin-bottom: 20px;
 `;

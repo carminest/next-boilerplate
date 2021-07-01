@@ -174,10 +174,12 @@ const SubMenu = styled.div<{ hasSubMenus: boolean }>`
   width: 1440px;
   padding-left: 120px;
   padding-right: 120px;
-
+  height: 60px;
   display: ${(props) => (props.hasSubMenus ? 'display' : 'none')};
   justify-content: space-between;
   align-items: center;
+  position: absolute;
+  margin-top: 96px;
 `;
 
 const Hbody = styled.div`

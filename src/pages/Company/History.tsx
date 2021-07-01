@@ -146,7 +146,6 @@ const ButtonLi = styled.li`
   line-height: 75px;
   &:hover {
     background-color: ${Color.Main};
-    border: none;
     color: ${Color.White};
     cursor: pointer;
   }
@@ -155,6 +154,9 @@ const ButtonLi = styled.li`
 const HistDiv = styled.div`
   margin-top: 20px;
   width: 100%;
+  padding-top: 96px;
+  padding-left: 22vw;
+  padding-right: 22vw;
 `;
 
 export default CompanyComp;

@@ -23,9 +23,6 @@ const AppLayout = ({ children }: AppLayoutProps): JSX.Element => {
 const Content = styled.div`
   min-height: 82vh;
   border: 2px solid greenyellow;
-  padding-top: 96px;
-  padding-left: 22vw;
-  padding-right: 22vw;
 `;
 
 export default AppLayout;
