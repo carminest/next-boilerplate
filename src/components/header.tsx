@@ -171,7 +171,7 @@ const Header = (): JSX.Element => {
 
 const SubMenu = styled.div<{ hasSubMenus: boolean }>`
   background-color: ${Color.White};
-  width: 1440px;
+  width: 100%;
   padding-left: 120px;
   padding-right: 120px;
   height: 60px;

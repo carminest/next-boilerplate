@@ -4,7 +4,7 @@ import Body from './body';
 import Footer from './footer';
 import Header from './header';
 import styled from '@src/commons/style/themes/styled';
-import IndexPage from '@src/pages/index';
+import Color from '@src/commons/style/themes/colors';
 
 type AppLayoutProps = {
   children: React.ReactNode;
@@ -23,6 +23,7 @@ const AppLayout = ({ children }: AppLayoutProps): JSX.Element => {
 const Content = styled.div`
   min-height: 82vh;
   border: 2px solid greenyellow;
+  background-color: ${Color.White};
 `;
 
 export default AppLayout;
