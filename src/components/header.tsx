@@ -39,7 +39,7 @@ const menus: menu[] = [
       {
         value: 2,
         name: '연혁',
-        url: '/Company/Info',
+        url: '/Company/History',
       },
     ],
   },
@@ -102,13 +102,19 @@ const Header = (): JSX.Element => {
     setSelectedMenu(value);
   };
 
+  const offHover = () => {
+    setSelectedMenu(null);
+  };
+
   const renderSubMenuList = useCallback((): JSX.Element => {
     return (
       <>
         {menus
           ?.find((menu) => menu.value === selectedMenu)
           ?.sub?.map((s) => (
-            <div key={s.value}>{s.name}</div>
+            <div key={s.value}>
+              <button onClick={() => router.push(s.url)}>{s.name}</button>
+            </div>
           ))}
       </>
     );
@@ -150,26 +156,30 @@ const Header = (): JSX.Element => {
         {renderHeaderLeftSide()}
         {renderHeaderRightSide()}
       </HeaderContainer>
-      {/* <SubMenu
+      <SubMenu
+        onMouseLeave={offHover}
         hasSubMenus={
-          // menus?.find((menu) => menu?.value === selectedMenu)?.sub?.length > 0
+          (menus?.find((menu) => menu?.value === selectedMenu)?.sub?.length ??
+            0) > 0
         }
       >
         {renderSubMenuList()}
-      </SubMenu> */}
+      </SubMenu>
     </Hbody>
   );
 };
 
 const SubMenu = styled.div<{ hasSubMenus: boolean }>`
   background-color: ${Color.White};
-  width: 1440px;
+  width: 100%;
   padding-left: 120px;
   padding-right: 120px;
-  border: 2px solid greenyellow;
+  height: 60px;
   display: ${(props) => (props.hasSubMenus ? 'display' : 'none')};
   justify-content: space-between;
   align-items: center;
+  position: absolute;
+  margin-top: 96px;
 `;
 
 const Hbody = styled.div`

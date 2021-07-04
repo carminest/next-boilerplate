@@ -6,9 +6,7 @@ import 'slick-carousel/slick/slick-theme.css';
 import { runInThisContext } from 'vm';
 
 const Simpleslider = (): JSX.Element => {
-  const Wrap = styled.div`
-    padding-top: 100px;
-  `;
+  const Wrap = styled.div``;
 
   const Slide1 = styled.div`
     background: #b359c5;
