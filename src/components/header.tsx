@@ -19,13 +19,6 @@ type sub = {
 
 const menus: menu[] = [
   {
-    name: 'LOGO',
-    value: 1,
-    url: '/',
-    button: false,
-    sub: [],
-  },
-  {
     name: '비버블록',
     value: 2,
     url: '/',
@@ -130,23 +123,28 @@ const Header = (): JSX.Element => {
 
   const renderHeaderLeftSide = (): JSX.Element => {
     return (
-      <>
-        <LeftHead>
-          <HeadUl>
-            {menus.map((menu) => (
-              <HeadLi
-                button
-                key={menu.value}
-                value={menu.value}
-                onClick={() => router.push(menu.url)}
-                onMouseOver={onHover}
-              >
-                {menu.name}
-              </HeadLi>
-            ))}
-          </HeadUl>
-        </LeftHead>
-      </>
+      <HeadUl>
+        <LogoImg
+          alt={''}
+          src={'/logo.svg'}
+          onClick={() => {
+            router.push('/').then(() => {
+              scrollTo(0, 0);
+            });
+          }}
+        />
+        {menus.map((menu) => (
+          <HeadLi
+            button
+            key={menu.value}
+            value={menu.value}
+            onClick={() => router.push(menu.url)}
+            onMouseOver={onHover}
+          >
+            {menu.name}
+          </HeadLi>
+        ))}
+      </HeadUl>
     );
   };
 
@@ -218,18 +216,10 @@ const ExpButton = styled.span`
   }
 `;
 
-const LeftHead = styled.span`
-  font-family: 'Noto Sans KR';
-  font-size: 20px;
-  color: #2c2c2c;
-  line-height: 48px;
-`;
-
 const HeadUl = styled.ul`
-  list-style: none;
-  margin: 0px;
-  padding: 0px;
   text-align: center;
+  display: flex;
+  align-items: center;
 `;
 
 const HeadLi = styled.li<{ button: boolean }>`
@@ -256,6 +246,10 @@ const RightHover = styled.span`
     font-weight: 600;
     cursor: pointer;
   }
+`;
+
+const LogoImg = styled.img`
+  cursor: pointer;
 `;
 
 export default Header;
