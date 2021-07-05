@@ -16,6 +16,7 @@ const GlobalStyles = (): JSX.Element => {
           -moz-osx-font-smoothing: grayscale;
           outline: none;
           color: ${Color.Grayscale900};
+          font-family: 'Noto Sans KR';
         }
         *::before,
         *::after {
