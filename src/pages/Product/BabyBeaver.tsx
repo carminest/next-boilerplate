@@ -40,17 +40,20 @@ const BabyBeaver = (): JSX.Element => {
 
   return (
     <>
-      <ProductSec>
-        <ProductText>
-          <ProductTitle>베이비비버 APP</ProductTitle>
-          <ProductIntroduce>
-            국내 최초 베이비싸인 콘텐츠를 포함한
-            <br /> 인터렉션 중심의 재미있는 학습앱!
-          </ProductIntroduce>
-        </ProductText>
-        <ProductImage />
-        <ProductEffect />
-      </ProductSec>
+      <ProductSection>
+        <ProductDiv>
+          <ProductText>
+            <ProductTitle>베이비비버 APP</ProductTitle>
+            <ProductIntroduce>
+              국내 최초 베이비싸인 콘텐츠를 포함한
+              <br /> 인터렉션 중심의 재미있는 학습앱!
+            </ProductIntroduce>
+          </ProductText>
+          <ProductImage src={'/mobile_img.png'} />
+
+          <ProductEffect src={'/effect.svg'} />
+        </ProductDiv>
+      </ProductSection>
       <MainSec>
         <NavSec>
           <NavMain>제품</NavMain>
@@ -79,21 +82,38 @@ const BabyBeaver = (): JSX.Element => {
 
 export default BabyBeaver;
 
+const ProductEffect = styled.img`
+  position: absolute;
+  top: 0px;
+  right: -170px;
+  width: 834px;
+  height: 303px;
+  background: transparent url('img/effect.png') 0% 0% no-repeat padding-box;
+  opacity: 1;
+`;
+
+const ProductDiv = styled.div`
+  width: 1206px;
+  height: 100%;
+  position: relative;
+`;
+
 const MainSec = styled.div`
   padding-left: 22vw;
   padding-right: 22vw;
   background-color: ${Color.White};
 `;
 
-const ProductSec = styled.div`
+const ProductSection = styled.div`
   width: 100%;
-  background-color: ${Color.Main};
+  background-color: ${Color.BabySign};
   height: 310px;
   margin-top: 96px;
   padding-left: 22vw;
   padding-right: 22vw;
   display: flex;
   align-items: center;
+  justify-content: center;
 `;
 
 const ButtonUl = styled.ul`
@@ -173,7 +193,8 @@ const Icons = styled.div`
 
 const ProductText = styled.div`
   display: inline-block;
-  position: relative;
+  position: absolute;
+  top: 100px;
 `;
 const ProductTitle = styled.div`
   font-family: 'Noto Sans Kannada UI';
@@ -187,26 +208,13 @@ const ProductIntroduce = styled.div`
   font-size: 17px;
 `;
 
-const ProductImage = styled.div`
-  background-image: url('http://beaverblock.com/images/product/mobile_img.png');
-  background-repeat: no-repeat;
-  background-size: contain;
-  width: 480px;
-  height: 280px;
+const ProductImage = styled.img`
   position: absolute;
-  right: 520px;
-  top: 200px;
-`;
-
-const ProductEffect = styled.div`
-  background-image: url('http://beaverblock.com/images/product/app_icon.png');
-  background-repeat: no-repeat;
-  background-size: contain;
-  width: 88px;
-  height: 88px;
-  position: absolute;
-  right: 520px;
-  top: 370px;
+  width: 477px;
+  height: 241px;
+  right: 20px;
+  top: 100px;
+  z-index: 999;
 `;
 
 const Content = styled.div`
