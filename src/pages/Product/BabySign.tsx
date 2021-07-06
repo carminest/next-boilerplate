@@ -40,31 +40,49 @@ const BabySign = (): JSX.Element => {
 
   return (
     <>
-      <ProductSec></ProductSec>
-      <MainSec>
+      <ProductSection></ProductSection>
+      <MainSection>
         <NavSec>
           <NavMain>제품</NavMain>
           <NavSub>HOME &gt; 제품 &gt; 베이비비버</NavSub>
         </NavSec>
         <ButtonUl>{renderProductButtons()}</ButtonUl>
         <Content>
-          <ContentImage />
+          <ContentImage
+            src={'http://beaverblock.com/images/product/page.png'}
+          />
+          <PurchaseButtonImage
+            src={'/resetting_but.svg'}
+            onClick={() => {
+              window.open('https://smartstore.naver.com/beaverblock');
+            }}
+          />
         </Content>
-      </MainSec>
-      <DownloadInfo />
+      </MainSection>
     </>
   );
 };
 
 export default BabySign;
 
-const MainSec = styled.div`
+const PurchaseButtonImage = styled.img`
+  position: relative;
+  cursor: pointer;
+  left: 550px;
+  bottom: 200px;
+  width: 347px;
+  height: 70px;
+  background: ${Color.White} 0% 0% no-repeat padding-box;
+  opacity: 1;
+`;
+
+const MainSection = styled.div`
   padding-left: 22vw;
   padding-right: 22vw;
   background-color: ${Color.White};
 `;
 
-const ProductSec = styled.div`
+const ProductSection = styled.div`
   width: 100%;
   background-color: ${Color.Main};
   height: 310px;
@@ -109,6 +127,8 @@ const Content = styled.div`
   background-color: ${Color.White};
 `;
 
-const ContentImage = styled.image`
-  src: url('http://beaverblock.com/images/product/page.png');
+const ContentImage = styled.img`
+  width: 1206px;
+  height: 2490px;
+  object-fit: contain;
 `;
