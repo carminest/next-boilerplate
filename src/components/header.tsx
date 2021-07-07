@@ -194,7 +194,6 @@ const HeaderContainer = styled.div`
   width: 1440px;
   padding-left: 120px;
   padding-right: 120px;
-  border: 2px solid greenyellow;
   display: flex;
   justify-content: space-between;
   align-items: center;

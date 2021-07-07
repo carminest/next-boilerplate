@@ -3,7 +3,6 @@ import styled from '@src/commons/style/themes/styled';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import { runInThisContext } from 'vm';
 
 const Simpleslider = (): JSX.Element => {
   const Wrap = styled.div``;
