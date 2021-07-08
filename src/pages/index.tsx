@@ -133,7 +133,14 @@ const IndexPage = (): JSX.Element => {
               <br /> 전속 모델 루하와 함께 활영한 다양한 유아동 영상을
               업로드합니다.
             </YoutubeText>
-            <YoutubeButton src={'/youtube_but.svg'} />
+            <YoutubeButton
+              onClick={() => {
+                window.open(
+                  'https://www.youtube.com/channel/UC0xCPEDCzkKrMSGdcLsF6tA',
+                );
+              }}
+              src={'/youtube_but.svg'}
+            />
           </YoutubeInfo>
         </Container>
       </BodyFirstSec>
@@ -286,6 +293,7 @@ const YoutubeText = styled.div`
 `;
 const YoutubeButton = styled.img`
   margin-top: 45px;
+  cursor: pointer;
 `;
 
 const BodySecondSec = styled.div`
