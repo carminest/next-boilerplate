@@ -10,6 +10,7 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import Color from '@src/commons/style/themes/colors';
+import Iframe from 'react-iframe';
 
 const IndexPage = (): JSX.Element => {
   const LeftCont = () => {
@@ -115,8 +116,18 @@ const IndexPage = (): JSX.Element => {
       <BodyFirstSec>
         <Container>
           <YoutubeContainer src={'/mobile_img.svg'} />
+          <Youtube>
+            <Iframe
+              id="player"
+              width="580px"
+              height="292px"
+              url="https://www.youtube.com/embed/oj3b4jvLco4"
+              position="absolute"
+            ></Iframe>
+          </Youtube>
           <YoutubeInfo>
             <YoutubeTitle>비버블록 TV</YoutubeTitle>
+
             <YoutubeText>
               비버블록에서 출시되는 다양한 유아동 컨텐츠를 소개,
               <br /> 전속 모델 루하와 함께 활영한 다양한 유아동 영상을
@@ -246,22 +257,36 @@ const BodyFirstSec = styled.div`
 
 const YoutubeContainer = styled.img`
   top: 138px;
-  width: 658px;
-  height: 316px;
+  width: 687px;
+  height: 342px;
   position: absolute;
+`;
+
+const Youtube = styled.div`
+  position: absolute;
+  left: 55px;
+  top: 150px;
 `;
 
 const YoutubeInfo = styled.div`
   height: 100%;
   position: absolute;
-  border: 2px solid black;
   right: 0px;
   text-align: right;
 `;
 
-const YoutubeTitle = styled.div``;
-const YoutubeText = styled.div``;
-const YoutubeButton = styled.img``;
+const YoutubeTitle = styled.div`
+  font-size: 50px;
+  font-weight: bold;
+  margin-top: 175px;
+`;
+const YoutubeText = styled.div`
+  font-size: 18px;
+  margin-top: 30px;
+`;
+const YoutubeButton = styled.img`
+  margin-top: 45px;
+`;
 
 const BodySecondSec = styled.div`
   height: 630px;
