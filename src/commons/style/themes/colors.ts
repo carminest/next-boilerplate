@@ -24,6 +24,8 @@ enum Color {
 
   //beaverblock
   Main = '#27C3AF',
+  BabyBeaver = '#41D9AE',
+  BabySign = '#FFDF98',
 }
 
 export default Color;

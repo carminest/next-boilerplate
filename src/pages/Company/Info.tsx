@@ -6,7 +6,7 @@ import { NavSub, NavMain, NavSec } from '@src/components/bodyComp/nav';
 
 const CompanyComp = (): JSX.Element => {
   return (
-    <>
+    <MainSection>
       <NavSec>
         <NavMain>회사 소개</NavMain>
         <NavSub>HOME &gt; 비버블록 &gt; 회사소개</NavSub>
@@ -39,9 +39,16 @@ const CompanyComp = (): JSX.Element => {
           </p>
         </InfoSlogan>
       </InfoDiv>
-    </>
+    </MainSection>
   );
 };
+
+const MainSection = styled.div`
+  padding-left: 22vw;
+  padding-right: 22vw;
+  background-color: ${Color.White};
+  padding-top: 100px;
+`;
 
 const Bold = styled.span`
   font-weight: 700;

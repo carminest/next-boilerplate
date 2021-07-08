@@ -40,35 +40,95 @@ const BabySign = (): JSX.Element => {
 
   return (
     <>
-      <ProductSec></ProductSec>
-      <MainSec>
+      <ProductSection>
+        <ProductDiv>
+          <ProductText>
+            <ProductTitle>핌핌 베이비싸인 키트</ProductTitle>
+            <ProductIntroduce>
+              우리 아이가 처음 만나는 ‘핌핌 베이비싸인’ 언어학습카드 <br />
+              우리 아이의 마음까지 세심하게 챙겨주세요.
+            </ProductIntroduce>
+          </ProductText>
+          <ProductImage src={'/kit_img.png'} />
+          <ProductEffect src={'/effect.svg'} />
+        </ProductDiv>
+      </ProductSection>
+      <MainSection>
         <NavSec>
           <NavMain>제품</NavMain>
           <NavSub>HOME &gt; 제품 &gt; 베이비비버</NavSub>
         </NavSec>
         <ButtonUl>{renderProductButtons()}</ButtonUl>
         <Content>
-          <ContentImage />
+          <ContentImage
+            src={'http://beaverblock.com/images/product/page.png'}
+          />
+          <PurchaseButtonImage
+            src={'/resetting_but.svg'}
+            onClick={() => {
+              window.open('https://smartstore.naver.com/beaverblock');
+            }}
+          />
         </Content>
-      </MainSec>
-      <DownloadInfo />
+      </MainSection>
     </>
   );
 };
 
 export default BabySign;
 
-const MainSec = styled.div`
+const ProductImage = styled.img`
+  position: absolute;
+  width: 477px;
+  height: 241px;
+  right: 20px;
+  top: 100px;
+  z-index: 999;
+`;
+
+const ProductEffect = styled.img`
+  position: absolute;
+  top: 0px;
+  right: -170px;
+  width: 834px;
+  height: 303px;
+  background: transparent url('img/effect.png') 0% 0% no-repeat padding-box;
+  opacity: 1;
+`;
+
+const PurchaseButtonImage = styled.img`
+  position: relative;
+  cursor: pointer;
+  left: 550px;
+  bottom: 200px;
+  width: 347px;
+  height: 70px;
+  background: ${Color.White} 0% 0% no-repeat padding-box;
+  opacity: 1;
+`;
+
+const MainSection = styled.div`
   padding-left: 22vw;
   padding-right: 22vw;
   background-color: ${Color.White};
 `;
 
-const ProductSec = styled.div`
+const ProductDiv = styled.div`
+  width: 1206px;
+  height: 100%;
+  position: relative;
+`;
+
+const ProductSection = styled.div`
   width: 100%;
-  background-color: ${Color.Main};
+  background-color: ${Color.BabySign};
   height: 310px;
   margin-top: 96px;
+  padding-left: 22vw;
+  padding-right: 22vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 const ButtonUl = styled.ul`
@@ -97,18 +157,31 @@ const ButtonLi = styled.li<{ currentMenu: boolean }>`
   color: ${(props) => (props.currentMenu === true ? Color.White : Color.Main)};
 `;
 
-const DownloadInfo = styled.div`
-  width: 100%;
-  height: 580px;
-  background-color: ${Color.Grayscale300};
-`;
-
 const Content = styled.div`
   width: 100%;
   margin-bottom: 100px;
   background-color: ${Color.White};
 `;
 
-const ContentImage = styled.image`
-  src: url('http://beaverblock.com/images/product/page.png');
+const ContentImage = styled.img`
+  width: 1206px;
+  height: 2490px;
+  object-fit: contain;
+`;
+
+const ProductText = styled.div`
+  display: inline-block;
+  position: absolute;
+  top: 100px;
+`;
+const ProductTitle = styled.div`
+  font-family: 'Noto Sans Kannada UI';
+  font-weight: bold;
+  font-size: 45px;
+  margin-bottom: 20px;
+`;
+const ProductIntroduce = styled.div`
+  font-family: 'Noto Sans Kannada UI';
+  font-weight: 700;
+  font-size: 17px;
 `;
