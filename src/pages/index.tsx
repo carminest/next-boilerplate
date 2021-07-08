@@ -13,24 +13,27 @@ import Color from '@src/commons/style/themes/colors';
 import Iframe from 'react-iframe';
 
 const IndexPage = (): JSX.Element => {
+  const router = useRouter();
+
   const LeftCont = () => {
-    const [click, setClick] = useState('none');
-
-    const onDetailClick = () => {
-      alert(click);
-      setClick('clicked');
-    };
-
     return (
       <>
-        <Cont>
+        <Cont side="left">
           <Title>비버블록 커리큘럼</Title>
           <Sub>
             누리 과정을 바탕으로 우리 아이에게
             <br />
             알맞는 콘텐츠를 찾아보세요.
           </Sub>
-          <SeeDetails onClick={onDetailClick}>자세히보기 &gt;</SeeDetails>
+          <SeeDetails
+            onClick={() => {
+              router.push('/Company/Curriculum').then(() => {
+                scrollTo(0, 0);
+              });
+            }}
+          >
+            자세히보기 &gt;
+          </SeeDetails>
 
           <CharImg side="left" />
         </Cont>
@@ -95,14 +98,22 @@ const IndexPage = (): JSX.Element => {
   const RightCont = () => {
     return (
       <>
-        <Cont>
+        <Cont side="right">
           <Title>비버블록 이야기</Title>
           <Sub>
             비버블록의 공식 블로그를
             <br />
             통해 새로운 소식을 만나보세요.
           </Sub>
-          <SeeDetails>자세히보기 &gt;</SeeDetails>
+          <SeeDetails
+            onClick={() => {
+              router.push('https://blog.naver.com/beaverblock').then(() => {
+                scrollTo(0, 0);
+              });
+            }}
+          >
+            자세히보기 &gt;
+          </SeeDetails>
 
           <CharImg side="right" />
         </Cont>
@@ -123,6 +134,7 @@ const IndexPage = (): JSX.Element => {
               height="292px"
               url="https://www.youtube.com/embed/oj3b4jvLco4"
               position="absolute"
+              allowFullScreen
             ></Iframe>
           </Youtube>
           <YoutubeInfo>
@@ -321,11 +333,12 @@ const Sub = styled.div`
   padding-top: 30px;
 `;
 
-const Cont = styled.span`
+const Cont = styled.span<{ side: string }>`
   display: inline-block;
   width: 560px;
   height: 440px;
-  background-color: #f8b8dd;
+  background-color: ${(props) =>
+    props.side === 'left' ? Color.Left : Color.Right};
   padding: 50px 30px;
 `;
 
