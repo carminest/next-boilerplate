@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
-import service from '@src/commons/policy/service.json';
+import privacy from '@src/commons/policy/privacy.json';
 import styled from '@src/commons/style/themes/styled';
 
-const Refund = (): JSX.Element => {
+const Privacy = (): JSX.Element => {
   const [lang, setLang] = useState('korean');
-  const policyLang = lang === 'korean' ? service.korean : service.english;
+  const policyLang = lang === 'korean' ? privacy.korean : privacy.english;
 
   return (
     <Policy>
       <PolicyContainer>
-        <PolicyHeader>이용약관 (Terms of service)</PolicyHeader>
+        <PolicyHeader>개인정보 처리방침</PolicyHeader>
         {policyLang.text.map((item, index) => (
           <>
             <TextTitle key={index}>{item.title}</TextTitle>
@@ -21,7 +21,7 @@ const Refund = (): JSX.Element => {
   );
 };
 
-export default Refund;
+export default Privacy;
 
 const TextTitle = styled.div`
   font-size: 18px;

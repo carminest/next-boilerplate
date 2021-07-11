@@ -11,6 +11,7 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import Color from '@src/commons/style/themes/colors';
 import Iframe from 'react-iframe';
+import CarouselStyles from '../commons/style/carousel';
 
 const IndexPage = (): JSX.Element => {
   const router = useRouter();
@@ -53,45 +54,49 @@ const IndexPage = (): JSX.Element => {
     };
 
     return (
-      <Wrap>
-        <Slider {...settings} dotsClass="test-css">
-          <Slide color={Color.BabySign}>
-            <SlideWrap>
-              <SlideContent>
-                <SlideTitle>핌핌 베이비싸인 키트</SlideTitle>
-                <ProductIntroduce>
-                  우리 아이가 처음 만나는 ‘핌핌 베이비싸인’ 언어학습카드 <br />
-                  우리 아이의 마음까지 세심하게 챙겨주세요.
-                </ProductIntroduce>
-                <DetailButton
-                  onClick={() =>
-                    window.open('https://smartstore.naver.com/beaverblock')
-                  }
-                  src={'/ok_but.svg'}
-                />
-                <ProductImage src={'/kit_img@2x.png'} />
-                <ProductEffect src={'/index_effect.svg'} />
-              </SlideContent>
-            </SlideWrap>
-          </Slide>
-          <Slide color={Color.BabyBeaver}>
-            <SlideWrap>
-              <SlideContent>
-                <SlideTitle>베이비비버 APP</SlideTitle>
-                <ProductIntroduce>
-                  국내 최초 베이비싸인 콘텐츠를 포함한 <br /> 인터렉션 중심의
-                  재미있는 학습앱
-                </ProductIntroduce>
+      <>
+        <CarouselStyles />
+        <Wrap>
+          <Slider {...settings} dotsClass="test-css">
+            <Slide color={Color.BabySign}>
+              <SlideWrap>
+                <SlideContent>
+                  <SlideTitle>핌핌 베이비싸인 키트</SlideTitle>
+                  <ProductIntroduce>
+                    우리 아이가 처음 만나는 ‘핌핌 베이비싸인’ 언어학습카드{' '}
+                    <br />
+                    우리 아이의 마음까지 세심하게 챙겨주세요.
+                  </ProductIntroduce>
+                  <DetailButton
+                    onClick={() =>
+                      window.open('https://smartstore.naver.com/beaverblock')
+                    }
+                    src={'/ok_but.svg'}
+                  />
+                  <ProductImage src={'/kit_img@2x.png'} />
+                  <ProductEffect src={'/index_effect.svg'} />
+                </SlideContent>
+              </SlideWrap>
+            </Slide>
+            <Slide color={Color.BabyBeaver}>
+              <SlideWrap>
+                <SlideContent>
+                  <SlideTitle>베이비비버 APP</SlideTitle>
+                  <ProductIntroduce>
+                    국내 최초 베이비싸인 콘텐츠를 포함한 <br /> 인터렉션 중심의
+                    재미있는 학습앱
+                  </ProductIntroduce>
 
-                <MobileImage src={'/mobile_img@2x.png'} />
-                <ProductEffect src={'/index_effect.svg'} />
-                <AppButton top={'300px'} src={'/apple_but/apple_but.png'} />
-                <AppButton top={'370px'} src={'/google_but/google_but.png'} />
-              </SlideContent>
-            </SlideWrap>
-          </Slide>
-        </Slider>
-      </Wrap>
+                  <MobileImage src={'/mobile_img@2x.png'} />
+                  <ProductEffect src={'/index_effect.svg'} />
+                  <AppButton top={'300px'} src={'/apple_but/apple_but.png'} />
+                  <AppButton top={'370px'} src={'/google_but/google_but.png'} />
+                </SlideContent>
+              </SlideWrap>
+            </Slide>
+          </Slider>
+        </Wrap>
+      </>
     );
   };
 

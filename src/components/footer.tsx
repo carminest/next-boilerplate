@@ -1,7 +1,10 @@
 import React from 'react';
 import styled from '@src/commons/style/themes/styled';
+import { useRouter } from 'next/router';
 
 const Footer = (): JSX.Element => {
+  const router = useRouter();
+
   return (
     <>
       <Fbody>
@@ -14,7 +17,14 @@ const Footer = (): JSX.Element => {
           </FooterLeftCont>
           <FooterMiddleCont>
             <FooterMiddleTop>
-              이용약관 | 개인정보 처리방침 | 환불정책
+              <Policy
+                onClick={() => {
+                  router.push('/Policy/Privacy');
+                }}
+              >
+                이용약관
+              </Policy>{' '}
+              | 개인정보 처리방침 | 환불정책
             </FooterMiddleTop>
             <FooterMiddleCenter>
               (주) 비버블록
@@ -40,6 +50,8 @@ const Footer = (): JSX.Element => {
     </>
   );
 };
+
+const Policy = styled.button``;
 
 const Fbody = styled.div`
   display: flex;

@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
-import service from '@src/commons/policy/service.json';
+import refund from '@src/commons/policy/refund.json';
 import styled from '@src/commons/style/themes/styled';
 
 const Refund = (): JSX.Element => {
   const [lang, setLang] = useState('korean');
-  const policyLang = lang === 'korean' ? service.korean : service.english;
+  const policyLang = refund.korean;
 
   return (
     <Policy>
       <PolicyContainer>
-        <PolicyHeader>이용약관 (Terms of service)</PolicyHeader>
+        <PolicyHeader>환불정책</PolicyHeader>
         {policyLang.text.map((item, index) => (
           <>
             <TextTitle key={index}>{item.title}</TextTitle>
