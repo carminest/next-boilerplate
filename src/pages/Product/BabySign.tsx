@@ -97,10 +97,10 @@ const ProductEffect = styled.img`
 `;
 
 const PurchaseButtonImage = styled.img`
-  position: relative;
+  position: absolute;
   cursor: pointer;
   left: 550px;
-  bottom: 200px;
+  bottom: 120px;
   width: 347px;
   height: 70px;
   background: ${Color.White} 0% 0% no-repeat padding-box;
@@ -161,6 +161,7 @@ const Content = styled.div`
   width: 100%;
   margin-bottom: 100px;
   background-color: ${Color.White};
+  position: relative;
 `;
 
 const ContentImage = styled.img`

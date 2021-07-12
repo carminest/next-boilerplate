@@ -16,7 +16,7 @@ export const NavMain = styled.span`
 `;
 
 export const NavSec = styled.div`
-  width: 100%;
+  width: 1206px;
   height: 100px;
   border-bottom: 3px solid ${Color.Main};
   color: ${Color.Main};
