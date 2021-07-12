@@ -32,13 +32,13 @@ function App({ Component, pageProps }: AppProps) {
           name="viewport"
           content="initial-scale=1.0,user-scalable=no,maximum-scale=1,width=device-width"
         />
-        <title>스터디</title>
-        <meta name="description" content="스터디" />
-        <meta name="keywords" content="스터디,테스트 " />
-        <meta property="og:title" content={customProps.title || '스터디'} />
+        <title>비버블록</title>
+        <meta name="description" content="비버블록" />
+        <meta name="keywords" content="비버블록" />
+        <meta property="og:title" content={customProps.title || '비버블록'} />
         <meta
           property="og:description"
-          content={customProps.description || '스터디 테스트 '}
+          content={customProps.description || '비버블록 테스트 페이지'}
         />
         <meta property="og:type" content="website" />
 
