@@ -11,10 +11,10 @@ const Refund = (): JSX.Element => {
       <PolicyContainer>
         <PolicyHeader>환불정책</PolicyHeader>
         {policyLang.text.map((item, index) => (
-          <>
-            <TextTitle key={index}>{item.title}</TextTitle>
+          <React.Fragment key={index}>
+            <TextTitle>{item.title}</TextTitle>
             <TextContent>{item.content}</TextContent>
-          </>
+          </React.Fragment>
         ))}
       </PolicyContainer>
     </Policy>
