@@ -101,15 +101,23 @@ const Header = (): JSX.Element => {
 
   const renderSubMenuList = useCallback((): JSX.Element => {
     return (
-      <>
+      <SubMenuContainer show={!!selectedMenu}>
         {menus
           ?.find((menu) => menu.value === selectedMenu)
           ?.sub?.map((s) => (
             <div key={s.value}>
-              <button onClick={() => router.push(s.url)}>{s.name}</button>
+              <button
+                onClick={() =>
+                  router.push(s.url).then(() => {
+                    scrollTo(0, 0);
+                  })
+                }
+              >
+                {s.name}
+              </button>
             </div>
           ))}
-      </>
+      </SubMenuContainer>
     );
   }, [selectedMenu]);
 
@@ -170,14 +178,12 @@ const Header = (): JSX.Element => {
 const SubMenu = styled.div<{ hasSubMenus: boolean }>`
   background-color: ${Color.White};
   width: 100%;
-  padding-left: 120px;
-  padding-right: 120px;
+  padding: 0 120px;
   height: 60px;
   display: ${(props) => (props.hasSubMenus ? 'display' : 'none')};
   justify-content: space-between;
   align-items: center;
-  position: absolute;
-  margin-top: 96px;
+  position: relative;
 `;
 
 const Hbody = styled.div`
@@ -249,6 +255,12 @@ const RightHover = styled.span`
 
 const LogoImg = styled.img`
   cursor: pointer;
+`;
+
+const SubMenuContainer = styled.div<{ show: boolean }>`
+  position: absolute;
+  top: ${(props) => (props.show ? 0 : -96)}px;
+  transition: 0.4s;
 `;
 
 export default Header;
