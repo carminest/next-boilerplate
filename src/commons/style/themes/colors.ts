@@ -26,6 +26,8 @@ enum Color {
   Main = '#27C3AF',
   BabyBeaver = '#41D9AE',
   BabySign = '#FFDF98',
+  Left = '#FFA7A7',
+  Right = '#FFD762',
 }
 
 export default Color;
