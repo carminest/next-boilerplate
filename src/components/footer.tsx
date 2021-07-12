@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from '@src/commons/style/themes/styled';
 import { useRouter } from 'next/router';
+import Color from '@src/commons/style/themes/colors';
 
 const Footer = (): JSX.Element => {
   const router = useRouter();
@@ -17,14 +18,20 @@ const Footer = (): JSX.Element => {
           </FooterLeftCont>
           <FooterMiddleCont>
             <FooterMiddleTop>
-              <Policy
-                onClick={() => {
-                  router.push('/Policy/Privacy');
-                }}
-              >
-                이용약관
-              </Policy>{' '}
-              | 개인정보 처리방침 | 환불정책
+              <PolicyContainer>
+                {policyList.map((policy, index) => (
+                  <Policy
+                    key={index}
+                    onClick={() => {
+                      router.push(policy.path).then(() => {
+                        scrollTo(0, 0);
+                      });
+                    }}
+                  >
+                    {policy.label}
+                  </Policy>
+                ))}
+              </PolicyContainer>
             </FooterMiddleTop>
             <FooterMiddleCenter>
               (주) 비버블록
@@ -41,9 +48,9 @@ const Footer = (): JSX.Element => {
             </FooterMiddleBottom>
           </FooterMiddleCont>
           <FooterRightInfo>
-            <img className="icons" src={Instagram} />
-            <img className="icons" src={Youtube} />
-            <img className="icons" src={Blog} />
+            <img src={Instagram} />
+            <img src={Youtube} />
+            <img src={Blog} />
           </FooterRightInfo>
         </FooterMainCont>
       </Fbody>
@@ -51,7 +58,26 @@ const Footer = (): JSX.Element => {
   );
 };
 
-const Policy = styled.button``;
+const PolicyContainer = styled.div`
+  margin-bottom: 30px;
+`;
+
+const Policy = styled.span`
+  cursor: pointer;
+  color: ${Color.White};
+  padding: 0 10px;
+  border-right: solid 1px ${Color.White};
+  font-family: 'NotoSans Kannada-Regular';
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  &:last-child {
+    border: none;
+  }
+  &:first-child {
+    padding-left: 0;
+  }
+`;
 
 const Fbody = styled.div`
   display: flex;
@@ -126,6 +152,12 @@ const FooterRightInfo = styled.div`
   display: flex;
   justify-content: space-around;
 `;
+
+const policyList = [
+  { label: '이용약관', path: '/Policy/Service' },
+  { label: '개인정보 처리방침', path: '/Policy/Privacy' },
+  { label: '환불정책', path: '/Policy/Refund' },
+];
 
 const Instagram =
   'http://beaverblock.com/images/footer/footer-instagram-btn.svg';
