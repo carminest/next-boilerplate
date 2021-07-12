@@ -22,7 +22,7 @@ const AppLayout = ({ children }: AppLayoutProps): JSX.Element => {
 
 const Content = styled.div`
   min-height: 82vh;
-  border: 2px solid greenyellow;
+  border: 1px solid #ffffff;
   background-color: ${Color.White};
 `;
 

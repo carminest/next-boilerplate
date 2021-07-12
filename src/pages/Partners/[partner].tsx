@@ -13,9 +13,9 @@ const PartnerPage = (partnerPageProps: PartnerPageProps): JSX.Element => {
 
   return (
     <>
-      <img src={partnerImg} alt={''} />
+      {/* <img src={partnerImg} alt={''} />
       <h2>{partnerName}</h2>
-      <p>{partnerDescription}</p>
+      <p>{partnerDescription}</p> */}
     </>
   );
 };
