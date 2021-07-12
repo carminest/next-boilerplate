@@ -57,25 +57,9 @@ const menus: menu[] = [
   {
     name: '파트너사',
     value: 4,
-    url: '/',
+    url: '/Partners',
     button: false,
-    sub: [
-      {
-        value: 1,
-        name: '애플비',
-        url: '/Partners/AppleBee',
-      },
-      {
-        value: 2,
-        name: '핑고엔터테인먼트',
-        url: '/Partners/Pingo',
-      },
-      {
-        value: 3,
-        name: '로이비쥬얼',
-        url: '/Partners/RoiVisual',
-      },
-    ],
+    sub: [],
   },
   {
     name: '체험단신청',
