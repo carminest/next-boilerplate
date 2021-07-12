@@ -53,29 +53,38 @@ const BabySign = (): JSX.Element => {
           <ProductEffect src={'/effect.svg'} />
         </ProductDiv>
       </ProductSection>
-      <MainSection>
-        <NavSec>
-          <NavMain>제품</NavMain>
-          <NavSub>HOME &gt; 제품 &gt; 베이비비버</NavSub>
-        </NavSec>
-        <ButtonUl>{renderProductButtons()}</ButtonUl>
-        <Content>
-          <ContentImage
-            src={'http://beaverblock.com/images/product/page.png'}
-          />
-          <PurchaseButtonImage
-            src={'/resetting_but.svg'}
-            onClick={() => {
-              window.open('https://smartstore.naver.com/beaverblock');
-            }}
-          />
-        </Content>
-      </MainSection>
+      <Main>
+        <MainWrapper>
+          <NavSec>
+            <NavMain>제품</NavMain>
+            <NavSub>HOME &gt; 제품 &gt; 베이비비버</NavSub>
+          </NavSec>
+          <ButtonUl>{renderProductButtons()}</ButtonUl>
+          <Content>
+            <ContentImage
+              src={'http://beaverblock.com/images/product/page.png'}
+            />
+            <PurchaseButtonImage
+              src={'/resetting_but.svg'}
+              onClick={() => {
+                window.open('https://smartstore.naver.com/beaverblock');
+              }}
+            />
+          </Content>
+        </MainWrapper>
+      </Main>
     </>
   );
 };
 
 export default BabySign;
+
+const Main = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+`;
 
 const ProductImage = styled.img`
   position: absolute;
@@ -107,9 +116,10 @@ const PurchaseButtonImage = styled.img`
   opacity: 1;
 `;
 
-const MainSection = styled.div`
-  padding-left: 22vw;
-  padding-right: 22vw;
+const MainWrapper = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  width: 1206px;
   background-color: ${Color.White};
 `;
 
@@ -158,7 +168,7 @@ const ButtonLi = styled.li<{ currentMenu: boolean }>`
 `;
 
 const Content = styled.div`
-  width: 100%;
+  width: 1206px;
   margin-bottom: 100px;
   background-color: ${Color.White};
   position: relative;
