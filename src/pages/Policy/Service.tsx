@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import serviceKor from '@src/commons/policy/service_kor.json';
-import serviceEng from '@src/commons/policy/service_eng.json';
+import serviceKor from '@public/policy_json/service_kor.json';
+import serviceEng from '@public/policy_json/service_eng.json';
 import styled from '@src/commons/style/themes/styled';
 import Color from '@src/commons/style/themes/colors';
 
@@ -13,13 +13,13 @@ const Refund = (): JSX.Element => {
     <Policy>
       <PolicyContainer>
         <PolicyHeader>이용약관 (Terms of service)</PolicyHeader>
-        {language.map((l) => (
+        {Languages.map((languages) => (
           <LangButton
-            onClick={() => setLang((prev) => l.value)}
-            current={lang === l.value}
-            key={l.value}
+            onClick={() => setLang((prev) => languages.value)}
+            current={lang === languages.value}
+            key={languages.value}
           >
-            {l.language}
+            {languages.language}
           </LangButton>
         ))}
         <MainTitle>{policy.mainTitle}</MainTitle>
@@ -37,7 +37,7 @@ const Refund = (): JSX.Element => {
 
 export default Refund;
 
-const language = [
+const Languages = [
   { language: '한국어', value: 'korean' },
   { language: 'English', value: 'english' },
 ];

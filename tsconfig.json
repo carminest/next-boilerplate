@@ -34,7 +34,8 @@
     "paths": {
       "@src/*": ["src/*"],
       "@commons/*": ["src/commons/*"],
-      "*": ["./@types/*"]
+      "*": ["./@types/*"],
+      "@public/*": ["public/*"]
     }
   },
   "exclude": ["node_modules"],

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import privacyKor from '@src/commons/policy/privacy_kor.json';
-import privacyEng from '@src/commons/policy/privacy_eng.json';
+import privacyKor from '@public/policy_json/privacy_kor.json';
+import privacyEng from '@public/policy_json/privacy_eng.json';
 import styled from '@src/commons/style/themes/styled';
 import Color from '@src/commons/style/themes/colors';
 
@@ -13,13 +13,13 @@ const Privacy = (): JSX.Element => {
     <Policy>
       <PolicyContainer>
         <PolicyHeader>개인정보 처리방침 (Privacy Policy)</PolicyHeader>
-        {language.map((l) => (
+        {Languages.map((languages) => (
           <LangButton
-            onClick={() => setLang((prev) => l.value)}
-            current={lang === l.value}
-            key={l.value}
+            onClick={() => setLang((prev) => languages.value)}
+            current={lang === languages.value}
+            key={languages.value}
           >
-            {l.language}
+            {languages.language}
           </LangButton>
         ))}
         <MainTitle>{policy.mainTitle}</MainTitle>
@@ -38,7 +38,7 @@ const Privacy = (): JSX.Element => {
 
 export default Privacy;
 
-const language = [
+const Languages = [
   { language: '한국어', value: 'korean' },
   { language: 'English', value: 'english' },
 ];

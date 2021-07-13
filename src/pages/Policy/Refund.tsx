@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
-import refundKor from '@src/commons/policy/refund_kor.json';
+import refundKor from '@public/policy_json//refund_kor.json';
 import styled from '@src/commons/style/themes/styled';
 
 const Refund = (): JSX.Element => {
-  const [lang, setLang] = useState('korean');
   const policy = refundKor;
   //환불규정은 영문이 없음.
 
@@ -33,8 +32,6 @@ const TextTitle = styled.div`
 const TextContent = styled.div`
   font: normal normal 300 18px/30px Noto Sans Myanmar;
 `;
-
-const LangButton = styled.button``;
 
 const PolicyHeader = styled.div`
   font: normal normal bold 25px/33px Noto Sans Kannada;
