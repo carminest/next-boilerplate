@@ -162,8 +162,10 @@ const IndexPage = (): JSX.Element => {
         </Container>
       </BodyFirstSec>
       <BodySecondSec>
-        <LeftCont />
-        <RightCont />
+        <DetailContainer>
+          <LeftCont />
+          <RightCont />
+        </DetailContainer>
       </BodySecondSec>
     </>
   );
@@ -171,6 +173,14 @@ const IndexPage = (): JSX.Element => {
 
 const left = 'http://beaverblock.com/images/index/Lua-Icon.png';
 const right = 'http://beaverblock.com/images/index/Character2.png';
+
+const DetailContainer = styled.div`
+  width: 1206px;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
 
 const Container = styled.div`
   position: relative;
@@ -316,11 +326,9 @@ const YoutubeButton = styled.img`
 const BodySecondSec = styled.div`
   height: 630px;
   width: 100%;
-  padding-left: 20vw;
-  padding-right: 20vw;
   display: flex;
-  justify-content: space-around;
   align-items: center;
+  justify-content: center;
   background-color: #f7f7d8;
 `;
 
