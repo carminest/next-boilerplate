@@ -28,6 +28,8 @@ enum Color {
   BabySign = '#FFDF98',
   Left = '#FFA7A7',
   Right = '#FFD762',
+  Coupon = '#EDFAF9',
+  Gray = '#A0A0A0',
 }
 
 export default Color;

@@ -88,16 +88,16 @@ const Header = (): JSX.Element => {
       <SubMenuContainer show={!!selectedMenu}>
         {menus
           ?.find((menu) => menu.value === selectedMenu)
-          ?.sub?.map((s) => (
-            <div key={s.value}>
+          ?.sub?.map((submenu) => (
+            <div key={submenu.value}>
               <button
                 onClick={() =>
-                  router.push(s.url).then(() => {
+                  router.push(submenu.url).then(() => {
                     scrollTo(0, 0);
                   })
                 }
               >
-                {s.name}
+                {submenu.name}
               </button>
             </div>
           ))}
@@ -107,9 +107,16 @@ const Header = (): JSX.Element => {
 
   const renderHeaderRightSide = () => {
     return (
-      <RightHover>
-        <span>쿠폰</span> | <span>로그인</span> | <span>회원가입</span>
-      </RightHover>
+      <LoginMenuSpan>
+        {LoginMenus.map((loginMenu) => (
+          <RightHover
+            key={loginMenu.value}
+            onClick={() => router.push(loginMenu.url)}
+          >
+            {loginMenu.name}
+          </RightHover>
+        ))}
+      </LoginMenuSpan>
     );
   };
 
@@ -158,6 +165,14 @@ const Header = (): JSX.Element => {
     </Hbody>
   );
 };
+
+const LoginMenus: sub[] = [
+  { name: '쿠폰 ㅣ ', url: '/Coupon/Register', value: 1 },
+  { name: '로그인 ㅣ ', url: '', value: 2 },
+  { name: '회원가입', url: '', value: 3 },
+];
+
+const LoginMenuSpan = styled.span``;
 
 const SubMenu = styled.div<{ hasSubMenus: boolean }>`
   background-color: ${Color.White};
@@ -208,6 +223,7 @@ const ExpButton = styled.span`
 const HeadUl = styled.ul`
   text-align: center;
   display: flex;
+  justify-content: space-around;
   align-items: center;
 `;
 
