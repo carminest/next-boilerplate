@@ -92,7 +92,7 @@ const ProductImage = styled.img`
   height: 241px;
   right: 20px;
   top: 100px;
-  z-index: 999;
+  z-index: 10;
 `;
 
 const ProductEffect = styled.img`

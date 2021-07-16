@@ -18,27 +18,25 @@ const IndexPage = (): JSX.Element => {
 
   const LeftCont = () => {
     return (
-      <>
-        <Cont side="left">
-          <Title>비버블록 커리큘럼</Title>
-          <Sub>
-            누리 과정을 바탕으로 우리 아이에게
-            <br />
-            알맞는 콘텐츠를 찾아보세요.
-          </Sub>
-          <SeeDetails
-            onClick={() => {
-              router.push('/Company/Curriculum').then(() => {
-                scrollTo(0, 0);
-              });
-            }}
-          >
-            자세히보기 &gt;
-          </SeeDetails>
+      <Cont side="left">
+        <Title>비버블록 커리큘럼</Title>
+        <Sub>
+          누리 과정을 바탕으로 우리 아이에게
+          <br />
+          알맞는 콘텐츠를 찾아보세요.
+        </Sub>
+        <SeeDetails
+          onClick={() => {
+            router.push('/Company/Curriculum').then(() => {
+              scrollTo(0, 0);
+            });
+          }}
+        >
+          자세히보기 &gt;
+        </SeeDetails>
 
-          <CharImg side="left" />
-        </Cont>
-      </>
+        <CharImg side="left" />
+      </Cont>
     );
   };
 
@@ -202,7 +200,7 @@ const AppButton = styled.img<{ top: string }>`
 
 const SlideWrap = styled.div`
   height: 100%;
-  width: 100vw;
+  min-width: 1080px;
   position: relative;
   display: flex;
   justify-content: center;
@@ -228,7 +226,7 @@ const MobileImage = styled.img`
   position: absolute;
   width: 658px;
   height: 316px;
-  z-index: 999;
+  z-index: 10;
   right: 0px;
   bottom: 140px;
 `;
@@ -237,7 +235,7 @@ const ProductImage = styled.img`
   position: absolute;
   width: 771px;
   height: 289px;
-  z-index: 999;
+  z-index: 10;
   right: -20px;
   bottom: 140px;
 `;
@@ -257,7 +255,7 @@ const Wrap = styled.div`
 
 const Slide = styled.div`
   background: ${(props) => props.color};
-  width: 100%;
+  min-width: 1080px;
   height: 592px;
   position: relative;
 `;
@@ -348,7 +346,7 @@ const Sub = styled.div`
 
 const Cont = styled.span<{ side: string }>`
   display: inline-block;
-  width: 560px;
+  min-width: 560px;
   height: 440px;
   background-color: ${(props) =>
     props.side === 'left' ? Color.Left : Color.Right};

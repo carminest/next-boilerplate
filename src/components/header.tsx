@@ -148,21 +148,23 @@ const Header = (): JSX.Element => {
   };
 
   return (
-    <Hbody>
-      <HeaderContainer>
-        {renderHeaderLeftSide()}
-        {renderHeaderRightSide()}
-      </HeaderContainer>
-      <SubMenu
-        onMouseLeave={offHover}
-        hasSubMenus={
-          (menus?.find((menu) => menu?.value === selectedMenu)?.sub?.length ??
-            0) > 0
-        }
-      >
-        {renderSubMenuList()}
-      </SubMenu>
-    </Hbody>
+    <HeaderWrap>
+      <Hbody>
+        <HeaderContainer>
+          {renderHeaderLeftSide()}
+          {renderHeaderRightSide()}
+        </HeaderContainer>
+        <SubMenu
+          onMouseLeave={offHover}
+          hasSubMenus={
+            (menus?.find((menu) => menu?.value === selectedMenu)?.sub?.length ??
+              0) > 0
+          }
+        >
+          {renderSubMenuList()}
+        </SubMenu>
+      </Hbody>
+    </HeaderWrap>
   );
 };
 
@@ -172,7 +174,18 @@ const LoginMenus: sub[] = [
   { name: '회원가입', url: '', value: 3 },
 ];
 
-const LoginMenuSpan = styled.span``;
+const HeaderWrap = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  position: fixed;
+  z-index: 10;
+  background-color: ${Color.White};
+`;
+
+const LoginMenuSpan = styled.span`
+  min-width: 200px;
+`;
 
 const SubMenu = styled.div<{ hasSubMenus: boolean }>`
   background-color: ${Color.White};
@@ -186,9 +199,8 @@ const SubMenu = styled.div<{ hasSubMenus: boolean }>`
 `;
 
 const Hbody = styled.div`
-  position: fixed;
-  z-index: 999;
-  width: 100%;
+  max-width: 1920px;
+  min-width: 1080px;
   background-color: white;
   display: flex;
   justify-content: center;
