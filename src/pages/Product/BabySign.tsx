@@ -59,7 +59,9 @@ const BabySign = (): JSX.Element => {
             <NavMain>제품</NavMain>
             <NavSub>HOME &gt; 제품 &gt; 베이비비버</NavSub>
           </NavSec>
-          <ButtonUl>{renderProductButtons()}</ButtonUl>
+          <ButtonContainer>
+            <ButtonUl>{renderProductButtons()}</ButtonUl>
+          </ButtonContainer>
           <Content>
             <ContentImage
               src={'http://beaverblock.com/images/product/page.png'}
@@ -78,6 +80,10 @@ const BabySign = (): JSX.Element => {
 };
 
 export default BabySign;
+
+const ButtonContainer = styled.div`
+  width: 1206px;
+`;
 
 const Main = styled.div`
   width: 100%;
@@ -124,6 +130,7 @@ const MainWrapper = styled.div`
 `;
 
 const ProductDiv = styled.div`
+  min-width: 1080px;
   width: 1206px;
   height: 100%;
   position: relative;

@@ -39,7 +39,7 @@ const BabyBeaver = (): JSX.Element => {
   };
 
   return (
-    <>
+    <Wrap>
       <ProductSection>
         <ProductDiv>
           <ProductText>
@@ -59,7 +59,9 @@ const BabyBeaver = (): JSX.Element => {
           <NavMain>제품</NavMain>
           <NavSub>HOME &gt; 제품 &gt; 베이비비버</NavSub>
         </NavSec>
-        <ButtonUl>{renderProductButtons()}</ButtonUl>
+        <ButtonContainer>
+          <ButtonUl>{renderProductButtons()}</ButtonUl>
+        </ButtonContainer>
         <Content>
           <SimpleSlider />
         </Content>
@@ -76,11 +78,23 @@ const BabyBeaver = (): JSX.Element => {
           <AndDownloadIcon />
         </Icons>
       </DownloadInfo>
-    </>
+    </Wrap>
   );
 };
 
 export default BabyBeaver;
+
+const ButtonContainer = styled.div`
+  width: 1206px;
+`;
+
+const Wrap = styled.div`
+  min-width: 1080px;
+  max-width: 1920px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+`;
 
 const ProductEffect = styled.img`
   position: absolute;
@@ -93,15 +107,19 @@ const ProductEffect = styled.img`
 `;
 
 const ProductDiv = styled.div`
-  width: 1206px;
+  min-width: 1080px;
   height: 100%;
   position: relative;
 `;
 
 const MainSec = styled.div`
-  padding-left: 22vw;
-  padding-right: 22vw;
+  max-width: 1920px;
+  min-width: 1080px;
+
   background-color: ${Color.White};
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
 `;
 
 const ProductSection = styled.div`
@@ -214,11 +232,11 @@ const ProductImage = styled.img`
   height: 241px;
   right: 20px;
   top: 100px;
-  z-index: 10;
+  z-index: 9;
 `;
 
 const Content = styled.div`
-  width: 100%;
+  width: 900px;
   height: 580px;
   margin-bottom: 100px;
   background-color: ${Color.White};
