@@ -1,30 +1,32 @@
 import React, { useState } from 'react';
 import styled from '@src/commons/style/themes/styled';
 import Color from '@src/commons/style/themes/colors';
-import { useForm } from 'react-hook-form';
-
-type CouponPolicy = {
-  policy: string;
-};
+import { useForm, SubmitHandler } from 'react-hook-form';
 
 const Register = (): JSX.Element => {
-  const { register, handleSubmit } = useForm();
-  const onSubmit = (data) => console.log(data);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormInputs>();
+
   const [isToggle, setIsToggle] = useState(false);
 
   const toggleButton = () => {
     setIsToggle(!isToggle);
-    console.log(isToggle);
 
     //클릭할 때 함수 실행
     //함수 실행시 다른 이미지로 src 변경
     //버튼이미지 url 변경
   };
 
-  const memberSubmit = (e: Event) => {
-    //회원가입 submit 버튼
-    e.preventDefault();
-  };
+  interface FormInputs {
+    email: string;
+    password: string;
+    passwordChk: string;
+  }
+
+  const onSubmit: SubmitHandler<FormInputs> = (data) => console.log(data);
 
   return (
     <CouponBody>
@@ -41,25 +43,25 @@ const Register = (): JSX.Element => {
 
         <FormTitle>회원 정보</FormTitle>
         <MemberInput
-          {...register('Email', { required: true })}
+          {...register('email', { required: true })}
+          {...(errors.email && '이메일은 필수 입력 항목입니다.')}
           type="email"
           placeholder="이메일*"
         ></MemberInput>
         <MemberInput
           {...register('password', { required: true })}
+          {...(errors.password && '비밀번호를 입력해주세요')}
           type="password"
           placeholder="비밀번호*"
         ></MemberInput>
         <MemberInput
           {...register('passwordChk', { required: true })}
+          {...(errors.passwordChk && '비밀번호 확인 항목을 입력해주세요')}
           type="password"
           placeholder="비밀번호 확인*"
         ></MemberInput>
         <ButtonContainer>
-          <RegisterButton
-            onClick={() => memberSubmit}
-            src={'/joining_but.svg'}
-          />
+          <RegisterButton value={''} type={'submit'} />
         </ButtonContainer>
       </InserMemberForm>
     </CouponBody>
@@ -102,15 +104,6 @@ const CouponPolicyContainer = styled.div`
   color: ${Color.Gray};
 `;
 
-const CouponPolicies: CouponPolicy[] = [
-  { policy: '이용권은 등록과 동시에 사용 가능합니다.' },
-  { policy: '한 번 등록된 이용권은 취소 및 재사용이 불가능합니다.' },
-  {
-    policy:
-      '이용권 사용 중 환불을 원하시는 경우에는 help@beaverblock.com으로 문의해주세요.',
-  },
-];
-
 const ButtonContainer = styled.div`
   text-align: center;
   margin-bottom: 40px;
@@ -123,12 +116,13 @@ const MemberButton = styled.span`
   font: normal normal normal 18px/25px Noto Sans Kannada;
 `;
 
-const RegisterButton = styled.img`
+const RegisterButton = styled.input`
+  background: url('/joining_but.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
   cursor: pointer;
-  width: 100%;
-  height: 70px;
-  object-fit: contain;
-  display: block;
+  min-width: 347px;
+  min-height: 70px;
   margin-bottom: 30px;
   margin-top: 60px;
 `;
