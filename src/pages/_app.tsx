@@ -37,7 +37,11 @@ function App({ Component, pageProps }: AppProps) {
         <meta name="keywords" content="비버블록" />
         <meta
           property="og:image"
-          content={customProps.imageUrl || '비버블록'}
+          content={
+            process.browser && customProps.imageUrl
+              ? window.location.origin + customProps.imageUrl
+              : ''
+          }
         />
         <meta property="og:title" content={customProps.title || '비버블록'} />
         <meta
