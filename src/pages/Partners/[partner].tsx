@@ -118,7 +118,7 @@ const PartnerBannerContainer = styled.div`
 `;
 
 const PartnerContainer = styled.div`
-  padding: 80px 0 0;
+  padding: 80px 30px 0;
   width: 100%;
 `;
 
