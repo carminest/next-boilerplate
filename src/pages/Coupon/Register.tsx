@@ -43,7 +43,7 @@ const CouponPolicyContainer = styled.div`
   width: 100%;
   height: 24px;
   font: normal normal normal 15px/20px Noto Sans Kannada;
-  color: ${Color.Gray};
+  color: ${Color.Gray100};
 `;
 
 const CouponPolicies: CouponPolicy[] = [

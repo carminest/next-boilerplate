@@ -1,7 +1,12 @@
 import React, { useCallback, useState } from 'react';
 import styled from '@src/commons/style/themes/styled';
-import { useRouter } from 'next/router';
+import { Router, useRouter } from 'next/router';
 import Color from '@src/commons/style/themes/colors';
+
+enum RouterType {
+  Dynamic = 'DYNAMIC',
+  Static = 'STATIC',
+}
 
 type menu = {
   name: string;
@@ -15,6 +20,8 @@ type sub = {
   value: number;
   name: string;
   url: string;
+  originUrl?: string;
+  type?: RouterType;
 };
 
 const menus: menu[] = [
@@ -59,6 +66,35 @@ const menus: menu[] = [
     value: 4,
     url: '/Partners',
     button: false,
+    sub: [
+      {
+        value: 0,
+        name: '애플비',
+        url: '/Partners/AppleBee',
+        originUrl: '/Partners/[partner]',
+        type: RouterType.Dynamic,
+      },
+      {
+        value: 1,
+        name: '핑고',
+        url: '/Partners/Pingo',
+        originUrl: '/Partners/[partner]',
+        type: RouterType.Dynamic,
+      },
+      {
+        value: 2,
+        name: '로이 비쥬얼',
+        url: '/Partners/RoiVisual',
+        originUrl: '/Partners/[partner]',
+        type: RouterType.Dynamic,
+      },
+    ],
+  },
+  {
+    name: '체험단신청',
+    value: 5,
+    url: '/',
+    button: true,
     sub: [],
   },
 ];
@@ -78,29 +114,38 @@ const Header = (): JSX.Element => {
 
   const renderSubMenuList = useCallback((): JSX.Element => {
     return (
-      <SubMenuItem show={!!selectedMenu}>
+      <SubMenuContainer show={!!selectedMenu}>
         {menus
           ?.find((menu) => menu.value === selectedMenu)
           ?.sub?.map((subMenu) => (
             <div key={subMenu.value}>
               <button
-                onClick={() =>
-                  router.push(subMenu.url).then(() => {
-                    scrollTo(0, 0);
-                  })
-                }
+                onClick={() => {
+                  if (
+                    subMenu.type === RouterType.Dynamic &&
+                    subMenu.originUrl
+                  ) {
+                    router.push(subMenu.originUrl, subMenu.url).then(() => {
+                      scrollTo(0, 0);
+                    });
+                  } else {
+                    router.push(subMenu.url).then(() => {
+                      scrollTo(0, 0);
+                    });
+                  }
+                }}
               >
                 {subMenu.name}
               </button>
             </div>
           ))}
-      </SubMenuItem>
+      </SubMenuContainer>
     );
   }, [selectedMenu]);
 
   const renderHeaderRightSide = () => {
     return (
-      <RightSideContainer>
+      <LoginMenuSpan>
         {LoginMenus.map((loginMenu) => (
           <RightHover
             key={loginMenu.value}
@@ -109,7 +154,7 @@ const Header = (): JSX.Element => {
             {loginMenu.name}
           </RightHover>
         ))}
-      </RightSideContainer>
+      </LoginMenuSpan>
     );
   };
 
@@ -141,21 +186,23 @@ const Header = (): JSX.Element => {
   };
 
   return (
-    <HeaderContainer>
-      <MainMenuContainer>
-        {renderHeaderLeftSide()}
-        {renderHeaderRightSide()}
-      </MainMenuContainer>
-      {/* <SubMenuContainer
-        onMouseLeave={offHover}
-        hasSubMenus={
-          (menus?.find((menu) => menu?.value === selectedMenu)?.sub?.length ??
-            0) > 0
-        }
-      >
-        {renderSubMenuList()}
-      </SubMenuContainer> */}
-    </HeaderContainer>
+    <HeaderWrap>
+      <Hbody>
+        <HeaderContainer>
+          {renderHeaderLeftSide()}
+          {renderHeaderRightSide()}
+        </HeaderContainer>
+        <SubMenu
+          onMouseLeave={offHover}
+          hasSubMenus={
+            (menus?.find((menu) => menu?.value === selectedMenu)?.sub?.length ??
+              0) > 0
+          }
+        >
+          {renderSubMenuList()}
+        </SubMenu>
+      </Hbody>
+    </HeaderWrap>
   );
 };
 
@@ -177,41 +224,37 @@ const HeaderWrap = styled.div`
 const LoginMenuSpan = styled.span`
   min-width: 200px;
 `;
-const RightSideContainer = styled.span``;
 
-const SubMenuContainer = styled.div<{ hasSubMenus: boolean }>`
+const SubMenu = styled.div<{ hasSubMenus: boolean }>`
   background-color: ${Color.White};
   width: 100%;
   padding: 0 120px;
   height: 60px;
+  display: ${(props) => (props.hasSubMenus ? 'display' : 'none')};
   justify-content: space-between;
   align-items: center;
   position: relative;
-  z-index: 9;
-  top: ${(props) => (props.hasSubMenus ? 0 : -96)}px;
 `;
 
-const HeaderContainer = styled.div`
+const Hbody = styled.div`
   max-width: 1920px;
   min-width: 1080px;
-  z-index: 10;
-  position: fixed;
-  width: 100%;
-  background-color: ${Color.White};
+  background-color: white;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
 `;
-const MainMenuContainer = styled.div`
-  background-color: ${Color.White};
-  max-width: 1440px;
-  padding: 0 120px;
+const HeaderContainer = styled.div`
+  background-color: white;
+  width: 1440px;
+  padding-left: 120px;
+  padding-right: 120px;
   display: flex;
   justify-content: space-between;
   align-items: center;
 `;
 
-const TrialButton = styled.span`
+const ExpButton = styled.span`
   border: 1px solid #ff6059;
   height: 50px;
   border-radius: 50px;
@@ -264,7 +307,7 @@ const LogoImg = styled.img`
   cursor: pointer;
 `;
 
-const SubMenuItem = styled.div<{ show: boolean }>`
+const SubMenuContainer = styled.div<{ show: boolean }>`
   position: absolute;
   top: ${(props) => (props.show ? 0 : -96)}px;
   transition: 0.4s;

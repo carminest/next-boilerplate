@@ -7,7 +7,7 @@ const GlobalStyles = (): JSX.Element => {
     <Global
       styles={css`
         #__next {
-          background-color: #f9f9f9;
+          background-color: ${Color.White};
         }
         * {
           margin: 0;

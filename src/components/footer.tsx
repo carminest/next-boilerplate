@@ -78,9 +78,8 @@ const Policy = styled.span`
 const Fbody = styled.div`
   display: flex;
   justify-content: center;
-  max-width: 1920px;
-  min-width: 1080px;
   background-color: #596161;
+  margin: auto;
 `;
 
 const FooterMainCont = styled.div`
