@@ -7,54 +7,51 @@ const Footer = (): JSX.Element => {
   const router = useRouter();
 
   return (
-    <>
-      <Fbody>
-        <FooterMainCont>
-          <FooterLeftCont>
-            <FooterLeftTel>070-4353-0803</FooterLeftTel>
-            <FooterLeftInfo>
-              AM 11:00~ PM 4:00 토 / 일 / 공휴일 휴무
-            </FooterLeftInfo>
-          </FooterLeftCont>
-          <FooterMiddleCont>
-            <FooterMiddleTop>
-              <PolicyContainer>
-                {policyList.map((policy, index) => (
-                  <Policy
-                    key={index}
-                    onClick={() => {
-                      router.push(policy.path).then(() => {
-                        scrollTo(0, 0);
-                      });
-                    }}
-                  >
-                    {policy.label}
-                  </Policy>
-                ))}
-              </PolicyContainer>
-            </FooterMiddleTop>
-            <FooterMiddleCenter>
-              (주) 비버블록
-              <br />
-              경기도 수원시 영통구 법조로 25, 2805호(광교SK뷰레이크,업무시설
-              A동)
-              <br />
-              Tel : 070-4353-0803
-              <br />
-              Mail: help@beaverblock.com
-            </FooterMiddleCenter>
-            <FooterMiddleBottom>
-              © Beaverblock Co., Ltd. All Rights Reserved 2021
-            </FooterMiddleBottom>
-          </FooterMiddleCont>
-          <FooterRightInfo>
-            <img src={Instagram} />
-            <img src={Youtube} />
-            <img src={Blog} />
-          </FooterRightInfo>
-        </FooterMainCont>
-      </Fbody>
-    </>
+    <Fbody>
+      <FooterMainCont>
+        <FooterLeftCont>
+          <FooterLeftTel>070-4353-0803</FooterLeftTel>
+          <FooterLeftInfo>
+            AM 11:00~ PM 4:00 토 / 일 / 공휴일 휴무
+          </FooterLeftInfo>
+        </FooterLeftCont>
+        <FooterMiddleCont>
+          <FooterMiddleTop>
+            <PolicyContainer>
+              {policyList.map((policy, index) => (
+                <Policy
+                  key={index}
+                  onClick={() => {
+                    router.push(policy.path).then(() => {
+                      scrollTo(0, 0);
+                    });
+                  }}
+                >
+                  {policy.label}
+                </Policy>
+              ))}
+            </PolicyContainer>
+          </FooterMiddleTop>
+          <FooterMiddleCenter>
+            (주) 비버블록
+            <br />
+            경기도 수원시 영통구 법조로 25, 2805호(광교SK뷰레이크,업무시설 A동)
+            <br />
+            Tel : 070-4353-0803
+            <br />
+            Mail: help@beaverblock.com
+          </FooterMiddleCenter>
+          <FooterMiddleBottom>
+            © Beaverblock Co., Ltd. All Rights Reserved 2021
+          </FooterMiddleBottom>
+        </FooterMiddleCont>
+        <FooterRightInfo>
+          <img src={Instagram} />
+          <img src={Youtube} />
+          <img src={Blog} />
+        </FooterRightInfo>
+      </FooterMainCont>
+    </Fbody>
   );
 };
 
@@ -82,7 +79,8 @@ const Policy = styled.span`
 const Fbody = styled.div`
   display: flex;
   justify-content: center;
-  width: 100%;
+  max-width: 1920px;
+  min-width: 1080px;
   background-color: #596161;
 `;
 
@@ -97,7 +95,7 @@ const FooterMainCont = styled.div`
 
 const FooterLeftCont = styled.div`
   /* border: 2px solid greenyellow; */
-  width: 20vw;
+  min-width: 250px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -105,7 +103,7 @@ const FooterLeftCont = styled.div`
 
 const FooterLeftTel = styled.div`
   /* border: 2px solid greenyellow; */
-  width: 100%;
+  min-width: 210px;
   font-size: 30px;
   font-weight: 800;
   color: white;
@@ -113,14 +111,14 @@ const FooterLeftTel = styled.div`
 
 const FooterLeftInfo = styled.div`
   /* border: 2px solid greenyellow; */
-  width: 100%;
+  min-width: 240px;
   font-size: 16px;
   color: white;
 `;
 
 const FooterMiddleCont = styled.div`
   /* border: 2px solid greenyellow; */
-  width: 33vw;
+  min-width: 449px;
   display: flex;
   flex-direction: column;
   justify-content: center;

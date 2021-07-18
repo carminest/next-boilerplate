@@ -24,6 +24,8 @@ const Content = styled.div`
   min-height: 82vh;
   border: 1px solid #ffffff;
   background-color: ${Color.White};
+  max-width: 1920px;
+  min-width: 1080px;
 `;
 
 export default AppLayout;

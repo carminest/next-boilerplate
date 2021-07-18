@@ -44,10 +44,12 @@ const CompanyComp = (): JSX.Element => {
 };
 
 const MainSection = styled.div`
-  padding-left: 22vw;
-  padding-right: 22vw;
   background-color: ${Color.White};
   padding-top: 100px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
 `;
 
 const Bold = styled.span`
@@ -55,14 +57,12 @@ const Bold = styled.span`
 `;
 
 const InfoDiv = styled.div`
+  width: 1206px;
   text-align: center;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
 `;
 
 const InfoMiddle = styled.div`
-  width: 100%;
+  min-width: 830px;
   height: 280px;
   display: flex;
   justify-content: center;
@@ -75,6 +75,7 @@ const InfoMiddle = styled.div`
 `;
 
 const InfoSlogan = styled.div`
+  min-width: 850px;
   font-size: 30px;
   display: flex;
   justify-content: center;
@@ -88,7 +89,7 @@ const InfoSlogan = styled.div`
 `;
 
 const ImgSec = styled.div`
-  width: 100%;
+  width: 1206px;
   height: 373px;
   display: flex;
   justify-content: center;
