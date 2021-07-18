@@ -64,14 +64,13 @@ const Policy = styled.span`
   color: ${Color.White};
   padding: 0 10px;
   border-right: solid 1px ${Color.White};
-  font-family: 'NotoSans Kannada-Regular';
   font-size: 18px;
   font-style: normal;
   font-weight: 400;
-  &:last-child {
+  &:last-of-type {
     border: none;
   }
-  &:first-child {
+  &:first-of-type {
     padding-left: 0;
   }
 `;
@@ -79,9 +78,8 @@ const Policy = styled.span`
 const Fbody = styled.div`
   display: flex;
   justify-content: center;
-  max-width: 1920px;
-  min-width: 1080px;
   background-color: #596161;
+  margin: auto;
 `;
 
 const FooterMainCont = styled.div`

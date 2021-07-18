@@ -68,7 +68,6 @@ const InfoMiddle = styled.div`
   justify-content: center;
   align-items: center;
   line-height: 40px;
-  font-family: 'Noto Sans Myanmar';
   font-style: normal;
   font-weight: 400;
   font-size: 20px;
@@ -80,7 +79,6 @@ const InfoSlogan = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family: 'Noto Sans Myanmar';
   font-style: normal;
   font-weight: 700;
   font-size: 25px;
@@ -98,7 +96,6 @@ const ImgSec = styled.div`
 `;
 
 const ImgText = styled.p`
-  font-family: 'Noto Sans Myanmar';
   font-weight: 700;
   font-size: 40px;
   opacity: 0.8;

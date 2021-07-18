@@ -9,7 +9,9 @@ class AppDocument extends Document {
   render(): JSX.Element {
     return (
       <Html>
-        <Head></Head>
+        <Head>
+          <link href="/fonts/NotoSansKR/NotoSansKR.css" rel="stylesheet" />
+        </Head>
         <body>
           <Main />
           <NextScript />

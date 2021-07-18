@@ -29,7 +29,10 @@ enum Color {
   Left = '#FFA7A7',
   Right = '#FFD762',
   Coupon = '#EDFAF9',
-  Gray = '#A0A0A0',
+  Gray100 = '#A0A0A0',
+  Gray200 = '#707070',
+
+  PartnerBannerBgColor = '#6DE0EA',
 }
 
 export default Color;

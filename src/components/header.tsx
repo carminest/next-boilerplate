@@ -1,7 +1,12 @@
 import React, { useCallback, useState } from 'react';
 import styled from '@src/commons/style/themes/styled';
-import { useRouter } from 'next/router';
+import { Router, useRouter } from 'next/router';
 import Color from '@src/commons/style/themes/colors';
+
+enum RouterType {
+  Dynamic = 'DYNAMIC',
+  Static = 'STATIC',
+}
 
 type menu = {
   name: string;
@@ -15,6 +20,8 @@ type sub = {
   value: number;
   name: string;
   url: string;
+  originUrl?: string;
+  type?: RouterType;
 };
 
 const menus: menu[] = [
@@ -59,7 +66,29 @@ const menus: menu[] = [
     value: 4,
     url: '/Partners',
     button: false,
-    sub: [],
+    sub: [
+      {
+        value: 0,
+        name: '애플비',
+        url: '/Partners/AppleBee',
+        originUrl: '/Partners/[partner]',
+        type: RouterType.Dynamic,
+      },
+      {
+        value: 1,
+        name: '핑고',
+        url: '/Partners/Pingo',
+        originUrl: '/Partners/[partner]',
+        type: RouterType.Dynamic,
+      },
+      {
+        value: 2,
+        name: '로이 비쥬얼',
+        url: '/Partners/RoiVisual',
+        originUrl: '/Partners/[partner]',
+        type: RouterType.Dynamic,
+      },
+    ],
   },
   {
     name: '체험단신청',
@@ -88,16 +117,25 @@ const Header = (): JSX.Element => {
       <SubMenuContainer show={!!selectedMenu}>
         {menus
           ?.find((menu) => menu.value === selectedMenu)
-          ?.sub?.map((submenu) => (
-            <div key={submenu.value}>
+          ?.sub?.map((subMenu) => (
+            <div key={subMenu.value}>
               <button
-                onClick={() =>
-                  router.push(submenu.url).then(() => {
-                    scrollTo(0, 0);
-                  })
-                }
+                onClick={() => {
+                  if (
+                    subMenu.type === RouterType.Dynamic &&
+                    subMenu.originUrl
+                  ) {
+                    router.push(subMenu.originUrl, subMenu.url).then(() => {
+                      scrollTo(0, 0);
+                    });
+                  } else {
+                    router.push(subMenu.url).then(() => {
+                      scrollTo(0, 0);
+                    });
+                  }
+                }}
               >
-                {submenu.name}
+                {subMenu.name}
               </button>
             </div>
           ))}

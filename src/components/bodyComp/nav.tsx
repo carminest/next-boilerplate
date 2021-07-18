@@ -9,7 +9,6 @@ export const NavSub = styled.span`
 `;
 
 export const NavMain = styled.span`
-  font-family: 'NotoSans Kannada-Regular';
   font-weight: 700;
   font-size: 25px;
   color: ${Color.Main};
