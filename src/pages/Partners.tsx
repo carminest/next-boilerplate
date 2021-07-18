@@ -146,7 +146,6 @@ const ButtonLi = styled.li<{ currentMenu: boolean }>`
   height: 70px;
   margin-right: 30px;
   border: 2px solid ${Color.Main};
-  font-family: 'Noto Sans Kannada';
   font-weight: 700;
   font-size: 25px;
   color: ${Color.Main};
@@ -176,13 +175,11 @@ const ProductText = styled.div`
   top: 100px;
 `;
 const ProductTitle = styled.div`
-  font-family: 'Noto Sans Kannada UI';
   font-weight: bold;
   font-size: 45px;
   margin-bottom: 20px;
 `;
 const ProductIntroduce = styled.div`
-  font-family: 'Noto Sans Kannada UI';
   font-weight: 700;
   font-size: 17px;
 `;

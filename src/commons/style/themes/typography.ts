@@ -1,4 +1,4 @@
-const FAMILY = ['Spoqa Han Sans', 'sans-serif'].join(',');
+const FAMILY = ['Noto Sans KR'].join(',');
 
 const WEIGHTS: { [key: number]: string } = {
   [6]: 'bold', // bold

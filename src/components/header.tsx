@@ -61,13 +61,6 @@ const menus: menu[] = [
     button: false,
     sub: [],
   },
-  {
-    name: '체험단신청',
-    value: 5,
-    url: '/',
-    button: true,
-    sub: [],
-  },
 ];
 
 const Header = (): JSX.Element => {
@@ -85,29 +78,29 @@ const Header = (): JSX.Element => {
 
   const renderSubMenuList = useCallback((): JSX.Element => {
     return (
-      <SubMenuContainer show={!!selectedMenu}>
+      <SubMenuItem show={!!selectedMenu}>
         {menus
           ?.find((menu) => menu.value === selectedMenu)
-          ?.sub?.map((submenu) => (
-            <div key={submenu.value}>
+          ?.sub?.map((subMenu) => (
+            <div key={subMenu.value}>
               <button
                 onClick={() =>
-                  router.push(submenu.url).then(() => {
+                  router.push(subMenu.url).then(() => {
                     scrollTo(0, 0);
                   })
                 }
               >
-                {submenu.name}
+                {subMenu.name}
               </button>
             </div>
           ))}
-      </SubMenuContainer>
+      </SubMenuItem>
     );
   }, [selectedMenu]);
 
   const renderHeaderRightSide = () => {
     return (
-      <LoginMenuSpan>
+      <RightSideContainer>
         {LoginMenus.map((loginMenu) => (
           <RightHover
             key={loginMenu.value}
@@ -116,7 +109,7 @@ const Header = (): JSX.Element => {
             {loginMenu.name}
           </RightHover>
         ))}
-      </LoginMenuSpan>
+      </RightSideContainer>
     );
   };
 
@@ -148,23 +141,21 @@ const Header = (): JSX.Element => {
   };
 
   return (
-    <HeaderWrap>
-      <Hbody>
-        <HeaderContainer>
-          {renderHeaderLeftSide()}
-          {renderHeaderRightSide()}
-        </HeaderContainer>
-        <SubMenu
-          onMouseLeave={offHover}
-          hasSubMenus={
-            (menus?.find((menu) => menu?.value === selectedMenu)?.sub?.length ??
-              0) > 0
-          }
-        >
-          {renderSubMenuList()}
-        </SubMenu>
-      </Hbody>
-    </HeaderWrap>
+    <HeaderContainer>
+      <MainMenuContainer>
+        {renderHeaderLeftSide()}
+        {renderHeaderRightSide()}
+      </MainMenuContainer>
+      {/* <SubMenuContainer
+        onMouseLeave={offHover}
+        hasSubMenus={
+          (menus?.find((menu) => menu?.value === selectedMenu)?.sub?.length ??
+            0) > 0
+        }
+      >
+        {renderSubMenuList()}
+      </SubMenuContainer> */}
+    </HeaderContainer>
   );
 };
 
@@ -186,37 +177,41 @@ const HeaderWrap = styled.div`
 const LoginMenuSpan = styled.span`
   min-width: 200px;
 `;
+const RightSideContainer = styled.span``;
 
-const SubMenu = styled.div<{ hasSubMenus: boolean }>`
+const SubMenuContainer = styled.div<{ hasSubMenus: boolean }>`
   background-color: ${Color.White};
   width: 100%;
   padding: 0 120px;
   height: 60px;
-  display: ${(props) => (props.hasSubMenus ? 'display' : 'none')};
   justify-content: space-between;
   align-items: center;
   position: relative;
+  z-index: 9;
+  top: ${(props) => (props.hasSubMenus ? 0 : -96)}px;
 `;
 
-const Hbody = styled.div`
+const HeaderContainer = styled.div`
   max-width: 1920px;
   min-width: 1080px;
-  background-color: white;
+  z-index: 10;
+  position: fixed;
+  width: 100%;
+  background-color: ${Color.White};
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
 `;
-const HeaderContainer = styled.div`
-  background-color: white;
-  width: 1440px;
-  padding-left: 120px;
-  padding-right: 120px;
+const MainMenuContainer = styled.div`
+  background-color: ${Color.White};
+  max-width: 1440px;
+  padding: 0 120px;
   display: flex;
   justify-content: space-between;
   align-items: center;
 `;
 
-const ExpButton = styled.span`
+const TrialButton = styled.span`
   border: 1px solid #ff6059;
   height: 50px;
   border-radius: 50px;
@@ -269,7 +264,7 @@ const LogoImg = styled.img`
   cursor: pointer;
 `;
 
-const SubMenuContainer = styled.div<{ show: boolean }>`
+const SubMenuItem = styled.div<{ show: boolean }>`
   position: absolute;
   top: ${(props) => (props.show ? 0 : -96)}px;
   transition: 0.4s;

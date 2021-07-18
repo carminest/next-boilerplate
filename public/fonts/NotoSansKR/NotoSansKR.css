@@ -1,0 +1,40 @@
+@font-face {
+    font-family: 'Noto Sans KR';
+    font-weight: 700;
+    font-display: fallback;
+    src: local('Noto Sans KR Bold'),
+    url('./NotoSansKR-Bold.otf') format('opentype'),
+}
+
+
+@font-face {
+    font-family: 'Noto Sans KR';
+    font-weight: 500;
+    font-display: fallback;
+    src: local('Noto Sans KR Medium'),
+    url('./NotoSansKR-Medium.otf') format('opentype'),
+}
+
+@font-face {
+    font-family: 'Noto Sans KR';
+    font-weight: 400;
+    font-display: fallback;
+    src: local('Noto Sans KR Regular'),
+    url('./NotoSansKR-Regular.otf') format('opentype'),
+}
+
+@font-face {
+    font-family: 'Noto Sans KR';
+    font-weight: 300;
+    font-display: fallback;
+    src: local('Noto Sans KR Light'),
+    url('./NotoSansKR-Light.otf') format('opentype'),
+}
+
+@font-face {
+    font-family: 'Noto Sans KR';
+    font-weight: 100;
+    font-display: fallback;
+    src: local('Noto Sans KR Thin'),
+    url('./NotoSansKR-Thin.otf') format('opentype'),
+}

@@ -12,13 +12,17 @@ type AppLayoutProps = {
 
 const AppLayout = ({ children }: AppLayoutProps): JSX.Element => {
   return (
-    <>
+    <AppLayoutContainer>
       <Header />
       <Content>{children}</Content>
       <Footer />
-    </>
+    </AppLayoutContainer>
   );
 };
+
+const AppLayoutContainer = styled.div`
+  position: relative;
+`;
 
 const Content = styled.div`
   min-height: 82vh;

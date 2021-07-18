@@ -146,7 +146,6 @@ const ButtonLi = styled.li`
   height: 70px;
   margin-right: 30px;
   border: 2px solid ${Color.Main};
-  font-family: 'Noto Sans Kannada';
   font-weight: 700;
   font-size: 25px;
   color: ${Color.Main};
