@@ -35,6 +35,10 @@ function App({ Component, pageProps }: AppProps) {
         <title>비버블록</title>
         <meta name="description" content="비버블록" />
         <meta name="keywords" content="비버블록" />
+        <meta
+          property="og:image"
+          content={customProps.imageUrl || '비버블록'}
+        />
         <meta property="og:title" content={customProps.title || '비버블록'} />
         <meta
           property="og:description"

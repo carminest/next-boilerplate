@@ -26,12 +26,10 @@ const AppLayoutContainer = styled.div`
 
 const Content = styled.div`
   min-height: 85vh;
-  border: 1px solid ${Color.White};
   background-color: ${Color.White};
   max-width: 1920px;
   min-width: 1080px;
-  display: flex;
-  justify-content: center;
+  display: block;
   width: 100%;
   margin: auto;
 `;

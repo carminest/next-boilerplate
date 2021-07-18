@@ -217,8 +217,9 @@ const HeaderWrap = styled.div`
   display: flex;
   justify-content: center;
   position: fixed;
-  z-index: 10;
+  z-index: 100;
   background-color: ${Color.White};
+  top: 0;
 `;
 
 const LoginMenuSpan = styled.span`
@@ -239,13 +240,13 @@ const SubMenu = styled.div<{ hasSubMenus: boolean }>`
 const Hbody = styled.div`
   max-width: 1920px;
   min-width: 1080px;
-  background-color: white;
+  background-color: ${Color.White};
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
 `;
 const HeaderContainer = styled.div`
-  background-color: white;
+  background-color: ${Color.White};
   width: 1440px;
   padding-left: 120px;
   padding-right: 120px;
