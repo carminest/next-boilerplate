@@ -183,7 +183,7 @@ const AppSentence = styled.p`
 `;
 
 const IOSDownloadIcon = styled.div`
-  background-image: url('http://beaverblock.com/images/index/apple_but.png');
+  background-image: url('http://beaverblock.com/images/index/apple_btn.png');
   background-size: contain;
   width: 200px;
   height: 60px;
@@ -192,7 +192,7 @@ const IOSDownloadIcon = styled.div`
 `;
 
 const AndDownloadIcon = styled.div`
-  background-image: url('http://beaverblock.com/images/index/google_but.png');
+  background-image: url('http://beaverblock.com/images/index/google_btn.png');
   background-size: contain;
   width: 200px;
   height: 60px;

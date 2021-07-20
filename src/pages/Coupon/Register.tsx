@@ -27,7 +27,7 @@ const Register = () => {
         <UseCoupon>이용권을 등록하고 베이비비버 어플을 이용해보세요.</UseCoupon>
         <EnterCoupon placeholder="이용권 코드를 정확히 입력해주세요"></EnterCoupon>
         <ButtonContainer>
-          <RegisterButton src={'/coupon_but.svg'} />
+          <RegisterButton src={'/coupon_btn.svg'} />
           <MemberButton>회원가입</MemberButton> |{' '}
           <MemberButton>로그인</MemberButton>
         </ButtonContainer>

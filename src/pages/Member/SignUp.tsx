@@ -35,7 +35,7 @@ const Register = (): JSX.Element => {
         <AgreeCheckBox></AgreeCheckBox>
         <AgreeAll>
           <CheckButton
-            src={isToggle === true ? '/check_but_on.svg' : '/check_but_off.svg'}
+            src={isToggle === true ? '/check_btn_on.svg' : '/check_btn_off.svg'}
             onClick={toggleButton}
           />
           상기 이용약관에 전부 동의합니다.
@@ -117,7 +117,7 @@ const MemberButton = styled.span`
 `;
 
 const RegisterButton = styled.input`
-  background: url('/joining_but.svg');
+  background: url('/joining_btn.svg');
   background-size: contain;
   background-repeat: no-repeat;
   cursor: pointer;
