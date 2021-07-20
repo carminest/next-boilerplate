@@ -2,6 +2,14 @@ import React, { useState } from 'react';
 import styled from '@src/commons/style/themes/styled';
 import Color from '@src/commons/style/themes/colors';
 import { useForm, SubmitHandler } from 'react-hook-form';
+import { useRouter } from 'next/router';
+
+type Policy = {
+  policy: string;
+  url: string | null;
+  required: boolean;
+  value: string;
+};
 
 const Register = (): JSX.Element => {
   const {
@@ -24,15 +32,47 @@ const Register = (): JSX.Element => {
     email: string;
     password: string;
     passwordChk: string;
+    check: boolean;
   }
 
   const onSubmit: SubmitHandler<FormInputs> = (data) => console.log(data);
 
+  const router = useRouter();
+
+  const renderPolicies = (): JSX.Element => {
+    return (
+      <>
+        {Policies.map((policies, index) => (
+          <PolicyContainer key={index}>
+            <input
+              type="checkbox"
+              value={policies.value}
+              {...register('check', { required: policies.required })}
+            />
+            &nbsp;
+            <PolicyText
+              onClick={() =>
+                policies.url
+                  ? router.push(policies.url).then(() => {
+                      scrollTo(0, 0);
+                    })
+                  : ''
+              }
+            >
+              {policies.policy}
+            </PolicyText>
+            에 동의합니다. ({policies.required === true ? '필수' : '선택'})
+          </PolicyContainer>
+        ))}
+      </>
+    );
+  };
+
   return (
-    <CouponBody>
+    <SignupContainer>
       <InserMemberForm onSubmit={handleSubmit(onSubmit)}>
         <FormTitle>개인정보 수집·이용 동의</FormTitle>
-        <AgreeCheckBox></AgreeCheckBox>
+        <AgreeCheck>{renderPolicies()}</AgreeCheck>
         <AgreeAll>
           <CheckButton
             src={isToggle === true ? '/check_btn_on.svg' : '/check_btn_off.svg'}
@@ -64,11 +104,39 @@ const Register = (): JSX.Element => {
           <RegisterButton value={''} type={'submit'} />
         </ButtonContainer>
       </InserMemberForm>
-    </CouponBody>
+    </SignupContainer>
   );
 };
 
 export default Register;
+
+const Policies: Policy[] = [
+  {
+    policy: '개인정보 수집·이용약관',
+    url: '/Policy/Privacy',
+    required: true,
+    value: 'privacy',
+  },
+  {
+    policy: '이용약관',
+    url: '/Policy/Service',
+    required: true,
+    value: 'service',
+  },
+  {
+    policy: '마케팅용 SMS및 이메일 수신',
+    url: null,
+    required: false,
+    value: 'information',
+  },
+];
+
+const PolicyText = styled.span`
+  font-weight: bold;
+  text-decoration: underline;
+  text-underline-position: under;
+  cursor: pointer;
+`;
 
 const CheckButton = styled.img`
   width: 32px;
@@ -83,7 +151,10 @@ const AgreeAll = styled.div`
   font: normal normal bold 18px/25px Noto Sans Kannada;
 `;
 
-const AgreeCheckBox = styled.div`
+const AgreeCheck = styled.div`
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
   margin-top: 5px;
   margin-bottom: 5px;
   width: 100%;
@@ -91,17 +162,15 @@ const AgreeCheckBox = styled.div`
   background-color: ${Color.Coupon};
   color: ${Color.Main};
   padding-left: 20px;
-  font: normal normal bold 22px/48px Noto Sans Myanmar;
   ::placeholder {
     color: ${Color.Main};
   }
 `;
 
-const CouponPolicyContainer = styled.div`
+const PolicyContainer = styled.div`
   width: 100%;
   height: 24px;
-  font: normal normal normal 15px/20px Noto Sans Kannada;
-  color: ${Color.Gray100};
+  font-size: 18px;
 `;
 
 const ButtonContainer = styled.div`
@@ -158,7 +227,7 @@ const FormTitle = styled.div`
   margin-bottom: 15px;
 `;
 
-const CouponBody = styled.div`
+const SignupContainer = styled.div`
   width: 100%;
   height: 100%;
   display: flex;

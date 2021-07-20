@@ -8,6 +8,7 @@ type CouponPolicy = {
 };
 
 const Register = () => {
+  const router = useRouter();
   const renderCouponPolicies = (): JSX.Element => {
     return (
       <>
@@ -21,19 +22,27 @@ const Register = () => {
   };
 
   return (
-    <CouponBody>
+    <CouponContent>
       <CouponContainer>
         <CouponTitle>쿠폰등록</CouponTitle>
         <UseCoupon>이용권을 등록하고 베이비비버 어플을 이용해보세요.</UseCoupon>
         <EnterCoupon placeholder="이용권 코드를 정확히 입력해주세요"></EnterCoupon>
         <ButtonContainer>
           <RegisterButton src={'/coupon_btn.svg'} />
-          <MemberButton>회원가입</MemberButton> |{' '}
-          <MemberButton>로그인</MemberButton>
+          <MemberButton
+            onClick={() =>
+              router.push('../Member/SignUp').then(() => {
+                scrollTo(0, 0);
+              })
+            }
+          >
+            회원가입
+          </MemberButton>{' '}
+          | <MemberButton>로그인</MemberButton>
         </ButtonContainer>
         {renderCouponPolicies()}
       </CouponContainer>
-    </CouponBody>
+    </CouponContent>
   );
 };
 
@@ -105,7 +114,7 @@ const CouponTitle = styled.div`
   border-bottom: 4px solid ${Color.Main};
 `;
 
-const CouponBody = styled.div`
+const CouponContent = styled.div`
   width: 100%;
   height: 100%;
   display: flex;
