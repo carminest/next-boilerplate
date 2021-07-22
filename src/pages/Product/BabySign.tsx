@@ -67,7 +67,7 @@ const BabySign = (): JSX.Element => {
               src={'http://beaverblock.com/images/product/page.png'}
             />
             <PurchaseButtonImage
-              src={'/resetting_but.svg'}
+              src={'/resetting_btn.svg'}
               onClick={() => {
                 window.open('https://smartstore.naver.com/beaverblock');
               }}

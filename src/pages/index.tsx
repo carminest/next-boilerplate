@@ -69,7 +69,7 @@ const IndexPage = (): JSX.Element => {
                     onClick={() =>
                       window.open('https://smartstore.naver.com/beaverblock')
                     }
-                    src={'/ok_but.svg'}
+                    src={'/ok_btn.svg'}
                   />
                   <ProductImage src={'/kit_img@2x.png'} />
                   <ProductEffect src={'/index_effect.svg'} />
@@ -87,8 +87,8 @@ const IndexPage = (): JSX.Element => {
 
                   <MobileImage src={'/mobile_img@2x.png'} />
                   <ProductEffect src={'/index_effect.svg'} />
-                  <AppButton top={'300px'} src={'/apple_but/apple_but.png'} />
-                  <AppButton top={'370px'} src={'/google_but/google_but.png'} />
+                  <AppButton top={'300px'} src={'/apple_btn/apple_btn.png'} />
+                  <AppButton top={'370px'} src={'/google_btn/google_btn.png'} />
                 </SlideContent>
               </SlideWrap>
             </Slide>
@@ -154,7 +154,7 @@ const IndexPage = (): JSX.Element => {
                   'https://www.youtube.com/channel/UC0xCPEDCzkKrMSGdcLsF6tA',
                 );
               }}
-              src={'/youtube_but.svg'}
+              src={'/youtube_btn.svg'}
             />
           </YoutubeInfo>
         </Container>
