@@ -40,7 +40,7 @@ function App({ Component, pageProps }: AppProps) {
           content={
             process.browser && customProps.imageUrl
               ? window.location.origin + customProps.imageUrl
-              : ''
+              : '/logo.svg'
           }
         />
         <meta property="og:title" content={customProps.title || '비버블록'} />
@@ -49,8 +49,6 @@ function App({ Component, pageProps }: AppProps) {
           content={customProps.description || '비버블록 테스트 페이지'}
         />
         <meta property="og:type" content="website" />
-
-        <meta property="op:url" content="127.0.0.1" />
       </Head>
       <ThemeProvider theme={defaultTheme}>
         <GlobalStyles />

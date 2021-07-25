@@ -8,3 +8,8 @@ export interface DynamicPageProps {
   description: string;
   imageUrl: string;
 }
+
+export enum ImageType {
+  Thumbnail = 'Thumbnail',
+  Sub = 'Sub',
+}

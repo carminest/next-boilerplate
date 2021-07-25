@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from 'react';
 import styled from '@src/commons/style/themes/styled';
-import { Router, useRouter } from 'next/router';
+import { useRouter } from 'next/router';
 import Color from '@src/commons/style/themes/colors';
 
 enum RouterType {
@@ -12,24 +12,16 @@ type menu = {
   name: string;
   value: number;
   url: string;
-  button: boolean;
-  sub: sub[];
-};
-
-type sub = {
-  value: number;
-  name: string;
-  url: string;
   originUrl?: string;
   type?: RouterType;
+  sub?: menu[];
 };
 
 const menus: menu[] = [
   {
     name: '비버블록',
     value: 2,
-    url: '/',
-    button: false,
+    url: '/Company/Info',
     sub: [
       {
         value: 1,
@@ -46,26 +38,30 @@ const menus: menu[] = [
   {
     name: '제품',
     value: 3,
-    url: '/',
-    button: false,
+    originUrl: '/Product/[product]',
+    url: '/Product/BabyBeaver',
     sub: [
       {
         value: 1,
         name: '베이비비버',
+        originUrl: '/Product/[product]',
         url: '/Product/BabyBeaver',
+        type: RouterType.Dynamic,
       },
       {
         value: 2,
         name: '핌핌베이비싸인',
+        originUrl: '/Product/[product]',
         url: '/Product/BabySign',
+        type: RouterType.Dynamic,
       },
     ],
   },
   {
     name: '파트너사',
     value: 4,
-    url: '/Partners',
-    button: false,
+    url: '/Partners/AppleBee',
+    originUrl: '/Partners/[partner]',
     sub: [
       {
         value: 0,
@@ -94,58 +90,21 @@ const menus: menu[] = [
     name: '체험단신청',
     value: 5,
     url: '/',
-    button: true,
     sub: [],
   },
 ];
 
 const Header = (): JSX.Element => {
   const router = useRouter();
-  const [selectedMenu, setSelectedMenu] = useState(null);
-
-  const onHover = (e) => {
-    const { value } = e.target;
-    setSelectedMenu(value);
-  };
+  const [selectedMenu, setSelectedMenu] = useState(0);
 
   const offHover = () => {
-    setSelectedMenu(null);
+    setSelectedMenu(0);
   };
-
-  const renderSubMenuList = useCallback((): JSX.Element => {
-    return (
-      <SubMenuContainer show={!!selectedMenu}>
-        {menus
-          ?.find((menu) => menu.value === selectedMenu)
-          ?.sub?.map((subMenu) => (
-            <div key={subMenu.value}>
-              <button
-                onClick={() => {
-                  if (
-                    subMenu.type === RouterType.Dynamic &&
-                    subMenu.originUrl
-                  ) {
-                    router.push(subMenu.originUrl, subMenu.url).then(() => {
-                      scrollTo(0, 0);
-                    });
-                  } else {
-                    router.push(subMenu.url).then(() => {
-                      scrollTo(0, 0);
-                    });
-                  }
-                }}
-              >
-                {subMenu.name}
-              </button>
-            </div>
-          ))}
-      </SubMenuContainer>
-    );
-  }, [selectedMenu]);
 
   const renderHeaderRightSide = () => {
     return (
-      <LoginMenuSpan>
+      <LoginMenuContainer>
         {LoginMenus.map((loginMenu) => (
           <RightHover
             key={loginMenu.value}
@@ -154,7 +113,7 @@ const Header = (): JSX.Element => {
             {loginMenu.name}
           </RightHover>
         ))}
-      </LoginMenuSpan>
+      </LoginMenuContainer>
     );
   };
 
@@ -171,15 +130,51 @@ const Header = (): JSX.Element => {
           }}
         />
         {menus.map((menu) => (
-          <HeadLi
-            button
+          <MenuLi
             key={menu.value}
-            value={menu.value}
-            onClick={() => router.push(menu.url)}
-            onMouseOver={onHover}
+            onMouseOver={() => {
+              setSelectedMenu(menu.value);
+            }}
           >
-            {menu.name}
-          </HeadLi>
+            <MainMenu
+              onClick={() => {
+                if (menu.type === RouterType.Dynamic && menu.originUrl) {
+                  router.push(menu.originUrl, menu.url).then(() => {
+                    scrollTo(0, 0);
+                  });
+                } else {
+                  router.push(menu.url).then(() => {
+                    scrollTo(0, 0);
+                  });
+                }
+              }}
+            >
+              {menu.name}
+            </MainMenu>
+            <SubMenu show={menu.value === selectedMenu} onMouseLeave={offHover}>
+              {menu.sub?.map((subMenu) => (
+                <SubMenuBtn
+                  key={subMenu.value}
+                  onClick={() => {
+                    if (
+                      subMenu.type === RouterType.Dynamic &&
+                      subMenu.originUrl
+                    ) {
+                      router.push(subMenu.originUrl, subMenu.url).then(() => {
+                        scrollTo(0, 0);
+                      });
+                    } else {
+                      router.push(subMenu.url).then(() => {
+                        scrollTo(0, 0);
+                      });
+                    }
+                  }}
+                >
+                  {subMenu.name}
+                </SubMenuBtn>
+              ))}
+            </SubMenu>
+          </MenuLi>
         ))}
       </HeadUl>
     );
@@ -192,21 +187,19 @@ const Header = (): JSX.Element => {
           {renderHeaderLeftSide()}
           {renderHeaderRightSide()}
         </HeaderContainer>
-        <SubMenu
+        <SubMenuContainer
           onMouseLeave={offHover}
           hasSubMenus={
             (menus?.find((menu) => menu?.value === selectedMenu)?.sub?.length ??
               0) > 0
           }
-        >
-          {renderSubMenuList()}
-        </SubMenu>
+        />
       </Hbody>
     </HeaderWrap>
   );
 };
 
-const LoginMenus: sub[] = [
+const LoginMenus: menu[] = [
   { name: '쿠폰 ㅣ ', url: '/Coupon/Register', value: 1 },
   { name: '로그인 ㅣ ', url: '', value: 2 },
   { name: '회원가입', url: '', value: 3 },
@@ -222,19 +215,26 @@ const HeaderWrap = styled.div`
   top: 0;
 `;
 
-const LoginMenuSpan = styled.span`
+const LoginMenuContainer = styled.div`
   min-width: 200px;
+  display: flex;
+  height: 100%;
+  width: 100%;
+  align-items: center;
+  justify-content: flex-end;
+  background-color: ${Color.White};
+  z-index: 11;
 `;
 
-const SubMenu = styled.div<{ hasSubMenus: boolean }>`
+const SubMenuContainer = styled.div<{ hasSubMenus: boolean }>`
   background-color: ${Color.White};
   width: 100%;
-  padding: 0 120px;
   height: 60px;
   display: ${(props) => (props.hasSubMenus ? 'display' : 'none')};
   justify-content: space-between;
   align-items: center;
   position: relative;
+  border-top: 3px solid #ebebeb;
 `;
 
 const Hbody = styled.div`
@@ -246,10 +246,8 @@ const Hbody = styled.div`
   flex-wrap: wrap;
 `;
 const HeaderContainer = styled.div`
+  width: 100%;
   background-color: ${Color.White};
-  width: 1440px;
-  padding-left: 120px;
-  padding-right: 120px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -272,28 +270,52 @@ const ExpButton = styled.span`
 `;
 
 const HeadUl = styled.ul`
-  text-align: center;
   display: flex;
-  justify-content: space-around;
+  justify-content: flex-start;
   align-items: center;
 `;
 
-const HeadLi = styled.li<{ button: boolean }>`
-  margin: 0px;
-  padding: 0px;
-  display: inline-block;
-  width: ${(props) => (props.button ? '150px' : '119px')};
+const MenuLi = styled.li`
+  position: relative;
+  width: 120px;
   height: 96px;
-  line-height: 96px;
-  vertical-align: middle;
+  z-index: 9;
+  background-color: ${Color.White};
+  display: flex;
+  align-items: center;
   &:hover {
     cursor: pointer;
+    border-bottom: solid 3px ${Color.Main};
   }
 `;
 
-HeadLi.defaultProps = {
-  button: false,
-};
+const MainMenu = styled.div`
+  font-size: 20px;
+  z-index: 10;
+  width: 100%;
+  height: 100%;
+  background-color: ${Color.White};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const SubMenu = styled.div<{ show: boolean }>`
+  position: absolute;
+  top: ${(props) => (props.show ? 96 : 0)}px;
+  transition: 0.4s;
+  padding: 20px 0;
+  display: flex;
+  justify-content: space-around;
+`;
+
+const SubMenuBtn = styled.button`
+  width: 120px;
+  &:hover {
+    color: ${Color.Main};
+    font-weight: bold;
+  }
+`;
 
 const RightHover = styled.span`
   font-size: 18px;
@@ -306,12 +328,7 @@ const RightHover = styled.span`
 
 const LogoImg = styled.img`
   cursor: pointer;
-`;
-
-const SubMenuContainer = styled.div<{ show: boolean }>`
-  position: absolute;
-  top: ${(props) => (props.show ? 0 : -96)}px;
-  transition: 0.4s;
+  margin-right: 60px;
 `;
 
 export default Header;

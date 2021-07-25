@@ -1,6 +1,4 @@
-import { Router, useRouter } from 'next/router';
-import React, { useState, useCallback } from 'react';
-import Body from './body';
+import React from 'react';
 import Footer from './footer';
 import Header from './header';
 import styled from '@src/commons/style/themes/styled';
@@ -32,6 +30,7 @@ const Content = styled.div`
   display: block;
   width: 100%;
   margin: auto;
+  padding: 0 30px;
 `;
 
 export default AppLayout;

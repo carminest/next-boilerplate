@@ -1,11 +1,6 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React from 'react';
 import { useRouter } from 'next/router';
-import { useDispatch, useSelector } from 'react-redux';
 import styled from '@commons/style/themes/styled';
-import { testApi } from '@src/containers/Test/api';
-import { RootState } from '@src/reducers';
-import { LOAD_TEST } from '@src/containers/Test/constants';
-import api from '@src/utils/AxiosUtils';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
@@ -71,7 +66,7 @@ const IndexPage = (): JSX.Element => {
                     }
                     src={'/ok_btn.svg'}
                   />
-                  <ProductImage src={'/kit_img@2x.png'} />
+                  <ProductImage src={'/products/baby_sign@2x.png'} />
                   <ProductEffect src={'/index_effect.svg'} />
                 </SlideContent>
               </SlideWrap>
@@ -85,7 +80,7 @@ const IndexPage = (): JSX.Element => {
                     재미있는 학습앱
                   </ProductIntroduce>
 
-                  <MobileImage src={'/mobile_img@2x.png'} />
+                  <MobileImage src={'/products/baby_beaver@2x.png'} />
                   <ProductEffect src={'/index_effect.svg'} />
                   <AppButton top={'300px'} src={'/apple_btn/apple_btn.png'} />
                   <AppButton top={'370px'} src={'/google_btn/google_btn.png'} />
@@ -250,7 +245,7 @@ const ProductIntroduce = styled.div`
 `;
 
 const Wrap = styled.div`
-  margin-top: 96px;
+  margin: 96px -30px 0;
 `;
 
 const Slide = styled.div`
