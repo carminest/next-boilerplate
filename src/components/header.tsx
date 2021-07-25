@@ -2,6 +2,8 @@ import React, { useCallback, useState } from 'react';
 import styled from '@src/commons/style/themes/styled';
 import { useRouter } from 'next/router';
 import Color from '@src/commons/style/themes/colors';
+import { MediaQuery } from '@src/commons/style/media-query';
+import { useMediaQuery } from 'react-responsive';
 
 enum RouterType {
   Dynamic = 'DYNAMIC',
@@ -98,6 +100,8 @@ const Header = (): JSX.Element => {
   const router = useRouter();
   const [selectedMenu, setSelectedMenu] = useState(0);
 
+  const isMobile = useMediaQuery({ maxWidth: 1023 });
+
   const offHover = () => {
     setSelectedMenu(0);
   };
@@ -151,29 +155,34 @@ const Header = (): JSX.Element => {
             >
               {menu.name}
             </MainMenu>
-            <SubMenu show={menu.value === selectedMenu} onMouseLeave={offHover}>
-              {menu.sub?.map((subMenu) => (
-                <SubMenuBtn
-                  key={subMenu.value}
-                  onClick={() => {
-                    if (
-                      subMenu.type === RouterType.Dynamic &&
-                      subMenu.originUrl
-                    ) {
-                      router.push(subMenu.originUrl, subMenu.url).then(() => {
-                        scrollTo(0, 0);
-                      });
-                    } else {
-                      router.push(subMenu.url).then(() => {
-                        scrollTo(0, 0);
-                      });
-                    }
-                  }}
-                >
-                  {subMenu.name}
-                </SubMenuBtn>
-              ))}
-            </SubMenu>
+            {isMobile ? undefined : (
+              <SubMenu
+                show={menu.value === selectedMenu}
+                onMouseLeave={offHover}
+              >
+                {menu.sub?.map((subMenu) => (
+                  <SubMenuBtn
+                    key={subMenu.value}
+                    onClick={() => {
+                      if (
+                        subMenu.type === RouterType.Dynamic &&
+                        subMenu.originUrl
+                      ) {
+                        router.push(subMenu.originUrl, subMenu.url).then(() => {
+                          scrollTo(0, 0);
+                        });
+                      } else {
+                        router.push(subMenu.url).then(() => {
+                          scrollTo(0, 0);
+                        });
+                      }
+                    }}
+                  >
+                    {subMenu.name}
+                  </SubMenuBtn>
+                ))}
+              </SubMenu>
+            )}
           </MenuLi>
         ))}
       </HeadUl>
@@ -224,6 +233,9 @@ const LoginMenuContainer = styled.div`
   justify-content: flex-end;
   background-color: ${Color.White};
   z-index: 11;
+  ${MediaQuery.Mobile} {
+    display: none;
+  }
 `;
 
 const SubMenuContainer = styled.div<{ hasSubMenus: boolean }>`

@@ -4,6 +4,7 @@ import { DynamicPageProps, ImageType } from '@src/commons/constants/type';
 import styled from '@src/commons/style/themes/styled';
 import Color from '@src/commons/style/themes/colors';
 import { useRouter } from 'next/router';
+import { MediaQuery } from '@src/commons/style/media-query';
 
 interface PartnerPageProps extends DynamicPageProps {
   partnerName: string;
@@ -62,7 +63,7 @@ const PartnerPage = (partnerPageProps: PartnerPageProps): JSX.Element => {
         <img src={partnerImg} alt={''} />
         <PartnerTextDetailContainer>
           <PartnerName>{partnerName}</PartnerName>
-          <PartnerDescription>{partnerDescription}</PartnerDescription>
+          <BasePartnerDescription>{partnerDescription}</BasePartnerDescription>
           <PartnerRecommendComment>
             {partnerName}의 다채로운 컨텐츠를 지금 베이비비버에서 만나보세요.
           </PartnerRecommendComment>
@@ -105,13 +106,22 @@ const Position = styled.span`
 `;
 
 const PartnerButtonsContainer = styled.div`
-  display: flex;
+  display: grid;
   margin: 20px 0 0;
-  gap: 30px;
+  grid-column-gap: 30px;
+  width: 100%;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(280px, 1fr);
+  overflow-x: auto;
+  ${MediaQuery.Mobile} {
+    grid-column-gap: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    grid-auto-columns: minmax(180px, 1fr);
+  }
 `;
 
 const PartnerBtn = styled.button<{ selected: boolean }>`
-  width: 280px;
   height: 70px;
   font-weight: 700;
   font-size: 25px;
@@ -123,14 +133,21 @@ const PartnerBtn = styled.button<{ selected: boolean }>`
 const PartnerDetailContainer = styled.div`
   padding: 70px 0;
   display: flex;
-  justify-content: center;
-  gap: 50px;
+  justify-content: space-around;
   align-items: center;
   width: 100%;
+  ${MediaQuery.Mobile} {
+    display: grid;
+  }
 `;
 
 const PartnerTextDetailContainer = styled.div`
   width: 570px;
+  ${MediaQuery.Mobile} {
+    margin-top: 30px;
+    width: 100%;
+    overflow: hidden;
+  }
 `;
 
 const PartnerName = styled.h2`
@@ -139,27 +156,29 @@ const PartnerName = styled.h2`
   font-size: 34px;
 `;
 
-const PartnerDescription = styled.p`
+const BasePartnerDescription = styled.p`
   margin-top: 30px;
   color: ${Color.Gray200};
   font-weight: 400;
   font-size: 22px;
   line-height: 1.5;
+  white-space: pre-wrap;
 `;
 
-const PartnerRecommendComment = styled.p`
+const PartnerRecommendComment = styled(BasePartnerDescription)`
   margin-top: 60px;
-  color: ${Color.Gray200};
   font-weight: 700;
-  font-size: 22px;
-  line-height: 1.5;
 `;
 
 const PartnerSubImgs = styled.div`
-  display: flex;
-  gap: 20px;
-  align-items: center;
   margin-top: 45px;
+  display: grid;
+  grid-column-gap: 20px;
+  align-items: center;
+  grid-template-columns: repeat(auto-fill);
+  grid-auto-flow: column;
+  grid-auto-columns: auto;
+  overflow-x: auto;
 `;
 
 const PartnerInfoObject = {
@@ -168,7 +187,7 @@ const PartnerInfoObject = {
     name: '애플비',
     code: 'AppleBee',
     description:
-      '봄날의 새순처럼 한 뼘 한 뼘 커 가는 우리 아이들의 꿈,그 소중한 꿈이 자라는 곳마다 애플비가 함께 합니다.',
+      '봄날의 새순처럼 한 뼘 한 뼘 커 가는 우리 아이들의 꿈, 그 소중한 꿈이 자라는 곳마다 애플비가 함께 합니다.',
     images: [
       {
         type: ImageType.Thumbnail,
