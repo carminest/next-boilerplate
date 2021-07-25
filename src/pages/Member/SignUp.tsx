@@ -1,8 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import styled from '@src/commons/style/themes/styled';
 import Color from '@src/commons/style/themes/colors';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { useRouter } from 'next/router';
+
+interface FormInputs {
+  email: string;
+  password: string;
+  passwordChk: string;
+  check: boolean;
+}
 
 type Policy = {
   policy: string;
@@ -18,26 +25,33 @@ const Register = (): JSX.Element => {
     formState: { errors },
   } = useForm<FormInputs>();
 
-  const [isToggle, setIsToggle] = useState(false);
+  const router = useRouter();
 
-  const toggleButton = () => {
-    setIsToggle(!isToggle);
-
-    //클릭할 때 함수 실행
-    //함수 실행시 다른 이미지로 src 변경
-    //버튼이미지 url 변경
-  };
-
-  interface FormInputs {
-    email: string;
-    password: string;
-    passwordChk: string;
-    check: boolean;
-  }
+  const [checkItems, setCheckItems] = useState([] as number[]);
 
   const onSubmit: SubmitHandler<FormInputs> = (data) => console.log(data);
 
-  const router = useRouter();
+  useEffect(() => console.log(checkItems), [checkItems]);
+
+  // 체크박스 단일 개체 선택
+  const handleSingleCheck = (idx, isChecked) => {
+    isChecked === true
+      ? setCheckItems([...checkItems, idx])
+      : setCheckItems(checkItems.filter((el) => el !== idx));
+  };
+
+  // 체크박스 전체 선택
+  const handleAllCheck = (checked) => {
+    if (checked) {
+      const idArray = [0, 1, 2];
+      setCheckItems(idArray);
+    } else {
+      setCheckItems([]);
+    }
+  };
+
+  //checkItems 상태가 바뀌면 전체선택button을 다시 렌더 한다.
+  //렌더 할 때 checkItems length가 3인 경우 on..
 
   const renderPolicies = (): JSX.Element => {
     return (
@@ -46,8 +60,12 @@ const Register = (): JSX.Element => {
           <PolicyContainer key={index}>
             <input
               type="checkbox"
+              checked={checkItems.includes(index)}
               value={policies.value}
               {...register('check', { required: policies.required })}
+              onChange={(e) => {
+                handleSingleCheck(index, e.currentTarget.checked);
+              }}
             />
             &nbsp;
             <PolicyText
@@ -68,18 +86,28 @@ const Register = (): JSX.Element => {
     );
   };
 
+  const renderAgreeAll = useCallback(() => {
+    const isAll = checkItems.length === 3 ? true : false;
+
+    return (
+      <AgreeAll>
+        <CheckButton
+          type="checkbox"
+          checked={isAll}
+          onChange={(e) => handleAllCheck(e.target.checked)}
+        />
+        상기 이용약관에 전부 동의합니다.
+      </AgreeAll>
+    );
+  }, [checkItems]);
+
   return (
     <SignupContainer>
       <InserMemberForm onSubmit={handleSubmit(onSubmit)}>
         <FormTitle>개인정보 수집·이용 동의</FormTitle>
         <AgreeCheck>{renderPolicies()}</AgreeCheck>
-        <AgreeAll>
-          <CheckButton
-            src={isToggle === true ? '/check_btn_on.svg' : '/check_btn_off.svg'}
-            onClick={toggleButton}
-          />
-          상기 이용약관에 전부 동의합니다.
-        </AgreeAll>
+
+        {renderAgreeAll()}
 
         <FormTitle>회원 정보</FormTitle>
         <MemberInput
@@ -138,17 +166,21 @@ const PolicyText = styled.span`
   cursor: pointer;
 `;
 
-const CheckButton = styled.img`
+const CheckButton = styled.input`
   width: 32px;
   height: 32px;
   cursor: pointer;
+  margin-right: 10px;
 `;
 
 const AgreeAll = styled.div`
+  display: flex;
+  align-items: center;
   width: 100%;
   height: 35px;
-  text-align: right;
-  font: normal normal bold 18px/25px Noto Sans Kannada;
+  font-size: 18px;
+  font-weight: bold;
+  justify-content: flex-end;
 `;
 
 const AgreeCheck = styled.div`
@@ -178,13 +210,6 @@ const ButtonContainer = styled.div`
   margin-bottom: 40px;
 `;
 
-const MemberButton = styled.span`
-  cursor: pointer;
-  display: inline-block;
-  width: 80px;
-  font: normal normal normal 18px/25px Noto Sans Kannada;
-`;
-
 const RegisterButton = styled.input`
   background: url('/joining_btn.svg');
   background-size: contain;
@@ -204,23 +229,16 @@ const MemberInput = styled.input`
   background-color: ${Color.Coupon};
   color: ${Color.Main};
   padding-left: 20px;
-  font: normal normal bold 22px/48px Noto Sans Myanmar;
+  font-size: 22px;
   ::placeholder {
     color: ${Color.Main};
   }
 `;
 
-const UseCoupon = styled.div`
-  width: 100%;
-
-  font: normal normal normal 18px/80px Noto Sans Kannada;
-  letter-spacing: 0px;
-`;
-
 const FormTitle = styled.div`
   width: 100%;
   height: 40px;
-  font: normal normal bold 25px/35px Noto Sans Kannada;
+  font-size: 25px;
   color: ${Color.Main};
   text-align: left;
   border-bottom: 4px solid ${Color.Main};
