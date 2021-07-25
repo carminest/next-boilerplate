@@ -3,3 +3,8 @@ export enum Env {
   Dev = 'development',
   Test = 'test',
 }
+
+export enum ProductCode {
+  BabySign = 'BabySign',
+  BabyBeaver = 'BabyBeaver',
+}
