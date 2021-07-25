@@ -3,6 +3,8 @@ import Footer from './footer';
 import Header from './header';
 import styled from '@src/commons/style/themes/styled';
 import Color from '@src/commons/style/themes/colors';
+import { MediaQuery } from '@src/commons/style/media-query';
+import { MOBILE_MAX_WIDTH } from '@src/commons/const';
 
 type AppLayoutProps = {
   children: React.ReactNode;
@@ -31,6 +33,10 @@ const Content = styled.div`
   width: 100%;
   margin: auto;
   padding: 0 30px;
+  ${MediaQuery.Mobile} {
+    max-width: ${MOBILE_MAX_WIDTH};
+    min-width: 360px;
+  }
 `;
 
 export default AppLayout;

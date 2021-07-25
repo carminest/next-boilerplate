@@ -213,7 +213,7 @@ const ProductEffect = styled.img`
   bottom: 5px;
   width: 834px;
   height: 592px;
-  background: transparent url('img/effect.png') 0% 0% no-repeat padding-box;
+  background: transparent url('/effect.svg') 0% 0% no-repeat padding-box;
   opacity: 1;
 `;
 

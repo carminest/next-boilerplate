@@ -6,6 +6,9 @@ import wrapper from '../store';
 import defaultTheme from '../commons/style/themes/defaults';
 import GlobalStyles from '../commons/style/global';
 import AppLayout from '../components/appLayout';
+import dynamic from 'next/dynamic';
+
+import { useMediaQuery } from 'react-responsive';
 
 /** External Plugin Css Inject */
 import 'core-js/stable';
@@ -17,10 +20,28 @@ import 'core-js/modules/es.array.unscopables.flat-map';
 import 'core-js/modules/es.object.from-entries';
 import 'core-js/modules/web.immediate';
 import { DynamicPageProps } from '@src/commons/constants/type';
+import { MOBILE_MAX_WIDTH, PC_MAX_WIDTH } from '@src/commons/const';
+
+// const SimpleSlider = dynamic(() => import('@src/sampleComponent'), {
+//   ssr: false,
+// });
 
 function App({ Component, pageProps }: AppProps) {
+  let mediaQuery = '';
+  if (process.browser) {
+    const isMobile = useMediaQuery({ maxWidth: MOBILE_MAX_WIDTH });
+    // const isTablet = useMediaQuery({ maxWidth: TABLET_MAX_WIDTH });
+    const isPC = useMediaQuery({ maxWidth: PC_MAX_WIDTH });
+    if (isMobile) {
+      mediaQuery = '';
+    } else if (isPC) {
+      mediaQuery = '';
+    }
+  }
+
   const props = {
     ...pageProps,
+    mediaQuery,
   };
 
   const customProps = pageProps as DynamicPageProps;
