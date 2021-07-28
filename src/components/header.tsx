@@ -91,7 +91,7 @@ const menus: menu[] = [
   {
     name: '체험단신청',
     value: 5,
-    url: '/',
+    url: '/Experience/Request',
     sub: [],
   },
 ];
