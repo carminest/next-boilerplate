@@ -91,7 +91,7 @@ const menus: menu[] = [
   {
     name: '체험단신청',
     value: 5,
-    url: '/',
+    url: '/Experience/Request',
     sub: [],
   },
 ];
@@ -210,8 +210,8 @@ const Header = (): JSX.Element => {
 
 const LoginMenus: menu[] = [
   { name: '쿠폰 ㅣ ', url: '/Coupon/Register', value: 1 },
-  { name: '로그인 ㅣ ', url: '', value: 2 },
-  { name: '회원가입', url: '', value: 3 },
+  { name: '로그인 ㅣ ', url: '/Member/SignIn', value: 2 },
+  { name: '회원가입', url: '/Member/SignUp', value: 3 },
 ];
 
 const HeaderWrap = styled.div`
