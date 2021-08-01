@@ -2,20 +2,21 @@ import React from 'react';
 import styled from '@src/commons/style/themes/styled';
 import { useRouter } from 'next/router';
 import Color from '@src/commons/style/themes/colors';
+import { MediaQuery } from '@src/commons/style/media-query';
 
 const Footer = (): JSX.Element => {
   const router = useRouter();
 
   return (
-    <Fbody>
-      <FooterMainCont>
-        <FooterLeftCont>
+    <FooterComponent>
+      <FooterMainContainer>
+        <FooterLeftContainer>
           <FooterLeftTel>070-4353-0803</FooterLeftTel>
           <FooterLeftInfo>
             AM 11:00~ PM 4:00 토 / 일 / 공휴일 휴무
           </FooterLeftInfo>
-        </FooterLeftCont>
-        <FooterMiddleCont>
+        </FooterLeftContainer>
+        <FooterMiddleContainer>
           <FooterMiddleTop>
             <PolicyContainer>
               {policyList.map((policy, index) => (
@@ -44,19 +45,35 @@ const Footer = (): JSX.Element => {
           <FooterMiddleBottom>
             © Beaverblock Co., Ltd. All Rights Reserved 2021
           </FooterMiddleBottom>
-        </FooterMiddleCont>
+        </FooterMiddleContainer>
         <FooterRightInfo>
           <img src={Instagram} />
           <img src={Youtube} />
           <img src={Blog} />
         </FooterRightInfo>
-      </FooterMainCont>
-    </Fbody>
+      </FooterMainContainer>
+    </FooterComponent>
   );
 };
 
+const policyList = [
+  { label: '이용약관', path: '/Policy/Service' },
+  { label: '개인정보 처리방침', path: '/Policy/Privacy' },
+  { label: '환불정책', path: '/Policy/Refund' },
+];
+
+const Instagram =
+  'http://beaverblock.com/images/footer/footer-instagram-btn.svg';
+
+const Youtube = 'http://beaverblock.com/images/footer/footer-youtube-btn.svg';
+
+const Blog = 'http://beaverblock.com/images/footer/footer-blog-btn.svg';
+
 const PolicyContainer = styled.div`
   margin-bottom: 30px;
+  ${MediaQuery.Mobile} {
+    margin-top: 30px;
+  }
 `;
 
 const Policy = styled.span`
@@ -73,34 +90,49 @@ const Policy = styled.span`
   &:first-of-type {
     padding-left: 0;
   }
+  ${MediaQuery.Mobile} {
+    order: 3;
+  }
 `;
 
-const Fbody = styled.div`
-  display: flex;
-  justify-content: center;
+const FooterComponent = styled.div`
   background-color: #596161;
   margin: auto;
-`;
-
-const FooterMainCont = styled.div`
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px 120px;
-  width: 1440px;
-  height: 235px;
-`;
-
-const FooterLeftCont = styled.div`
-  /* border: 2px solid greenyellow; */
-  min-width: 250px;
-  display: flex;
-  flex-direction: column;
   justify-content: center;
+`;
+
+const FooterMainContainer = styled.div`
+  ${MediaQuery.PC} {
+    display: grid;
+    grid-template-columns: 0.5fr 1fr 0.2fr;
+    align-items: center;
+    min-width: 1080px;
+    max-height: 235px;
+    padding: 20px 120px;
+  }
+  ${MediaQuery.Mobile} {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    flex-flow: column-reverse;
+    max-height: 1000px;
+  }
+`;
+
+const FooterLeftContainer = styled.div`
+  min-width: 400px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  ${MediaQuery.Mobile} {
+    display: none;
+  }
 `;
 
 const FooterLeftTel = styled.div`
-  /* border: 2px solid greenyellow; */
   min-width: 210px;
   font-size: 30px;
   font-weight: 800;
@@ -108,58 +140,63 @@ const FooterLeftTel = styled.div`
 `;
 
 const FooterLeftInfo = styled.div`
-  /* border: 2px solid greenyellow; */
   min-width: 240px;
   font-size: 16px;
   color: white;
 `;
 
-const FooterMiddleCont = styled.div`
-  /* border: 2px solid greenyellow; */
-  min-width: 449px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+const FooterMiddleContainer = styled.div`
+  ${MediaQuery.PC} {
+    min-width: 650px;
+  }
+  ${MediaQuery.Mobile} {
+    min-width: 360px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    flex-flow: column;
+  }
 `;
 
 const FooterMiddleTop = styled.div`
-  /* border: 1px solid greenyellow; */
-  height: 33%;
   color: white;
   font-size: 20px;
+  ${MediaQuery.Mobile} {
+    order: 2;
+  }
 `;
 const FooterMiddleCenter = styled.div`
-  /* border: 1px solid greenyellow; */
-  height: 33%;
+  min-width: 500px;
   color: white;
   font-weight: 500;
+  ${MediaQuery.Mobile} {
+    order: 1;
+    height: 160px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid ${Color.Grayscale300};
+    min-width: 360px;
+  }
 `;
 const FooterMiddleBottom = styled.div`
-  /* border: 1px solid greenyellow; */
-  height: 33%;
   color: white;
   padding-top: 25px;
   font-weight: 350;
+  ${MediaQuery.Mobile} {
+    order: 2;
+  }
 `;
 
 const FooterRightInfo = styled.div`
-  /* border: 2px solid greenyellow; */
-  width: 10vw;
-  display: flex;
-  justify-content: space-around;
+  ${MediaQuery.PC} {
+    display: flex;
+    justify-content: space-between;
+    min-width: 160px;
+  }
+  ${MediaQuery.Mobile} {
+    height: 120px;
+    min-width: 180px;
+  }
 `;
-
-const policyList = [
-  { label: '이용약관', path: '/Policy/Service' },
-  { label: '개인정보 처리방침', path: '/Policy/Privacy' },
-  { label: '환불정책', path: '/Policy/Refund' },
-];
-
-const Instagram =
-  'http://beaverblock.com/images/footer/footer-instagram-btn.svg';
-
-const Youtube = 'http://beaverblock.com/images/footer/footer-youtube-btn.svg';
-
-const Blog = 'http://beaverblock.com/images/footer/footer-blog-btn.svg';
 
 export default Footer;
